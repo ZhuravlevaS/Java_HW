@@ -6,15 +6,12 @@ public class Auto extends Vehicle {
         super(name, speed);
         this.engineType = engineType;
     }
-
     public void setEngineType(String engineType) {
         this.engineType = engineType;
     }
-
     public String getEngineType() {
         return engineType;
     }
-
     @Override
     public String toString() {
         return "Auto{" +
