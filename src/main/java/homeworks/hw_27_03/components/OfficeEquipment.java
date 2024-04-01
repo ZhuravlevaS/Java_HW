@@ -20,7 +20,7 @@ public class OfficeEquipment {
         countId++;
         this.modelName = modelName;
         this.manufacturer = manufacturer;
-        this.yearOfManufacture = yearOfManufacture;
+        this.yearOfManufacture = yearOfManufacture + 1900;
         this.price = price;
         this.weight = weight;
         this.isOperational = isOperational;

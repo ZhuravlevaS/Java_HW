@@ -3,157 +3,177 @@ package homeworks.hw_27_03.utils;
 import com.github.javafaker.Faker;
 import homeworks.hw_27_03.components.*;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class GenerateMockData {
-    public OfficeEquipment[] createMockArray() {
+    private static OfficeEquipment getOfficeEquipment(int number) {
         Faker faker = new Faker();
-        Date date =  new Date(1900, 01, 01);
+        Date date =  new Date(1, Calendar.JANUARY, 1);
         Date date1 =  new Date();
 
-        Laptop laptop = new Laptop(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.dune().character(),
-                faker.bool().bool()
+        switch (number) {
+            case 0:
+                return new Laptop(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.dune().character(),
+                        faker.bool().bool()
                 );
-
-        Monitor monitor = new Monitor(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.bool().bool(),
-                faker.bool().bool(),
-                faker.dune().character()
-        );
-
-        Printer printer = new Printer(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.dune().character(),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.dune().character()
-        );
-        Scanner scanner = new Scanner(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.bool().bool(),
-                faker.dune().character()
+            case 1:
+                return new Monitor(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.bool().bool(),
+                        faker.bool().bool(),
+                        faker.dune().character()
                 );
-        Projector projector = new Projector(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.dune().character(),
-                faker.dune().character(),
-                faker.bool().bool()
-        );
+            case 2:
+                return new Printer(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.dune().character(),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.dune().character()
+                );
+            case 3:
+                return new Scanner(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.bool().bool(),
+                        faker.dune().character()
+                );
+            case 4:
+                return new Projector(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.dune().character(),
+                        faker.dune().character(),
+                        faker.bool().bool()
+                );
+            case 5:
+                return new Tablet(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.dune().character()
+                );
+            case 6:
+                return new Phone(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.dune().character(),
+                        faker.number().randomDigit(),
+                        faker.bool().bool(),
+                        faker.dune().character(),
+                        faker.dune().character()
+                );
+            case 7:
+                return new Router(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.number().randomDigit(),
+                        faker.dune().planet(),
+                        faker.dune().planet(),
+                        faker.dune().planet(),
+                        faker.dune().planet(),
+                        faker.bool().bool(),
+                        faker.dune().planet()
+                );
+            case 8:
+                return new Switch(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.date().between(date, date1).getYear(),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.number().randomDouble(2, 1, 10000),
+                        faker.bool().bool(),
+                        faker.number().randomDigit(),
+                        faker.number().randomDigit(),
+                        faker.dune().planet(),
+                        faker.dune().planet(),
+                        faker.dune().planet(),
+                        faker.dune().planet(),
+                        faker.dune().planet()
+                );
+            default:
+                return null;
+        }
+    }
 
-        Tablet tablet = new Tablet(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.dune().character()
-        );
+    public static OfficeEquipment[] getRandomData(int lengthOfArray) {
+        Random random = new Random();
 
-        Phone phone = new Phone(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.dune().character(),
-                faker.number().randomDigit(),
-                faker.bool().bool(),
-                faker.dune().character(),
-                faker.dune().character()
-        );
+        OfficeEquipment[] array = new OfficeEquipment[lengthOfArray];
 
-        Router router = new Router(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.number().randomDigit(),
-                faker.dune().planet(),
-                faker.dune().planet(),
-                faker.dune().planet(),
-                faker.dune().planet(),
-                faker.bool().bool(),
-                faker.dune().planet()
-        );
+        for (int i = 0; i < lengthOfArray; i++) {
+            int randomNum = random.nextInt(0, 10);
 
-        Switch switchEquipment = new Switch(
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.date().between(date, date1).getYear(),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.number().randomDouble(2, 1, 10000),
-                faker.bool().bool(),
-                faker.number().randomDigit(),
-                faker.number().randomDigit(),
-                faker.dune().planet(),
-                faker.dune().planet(),
-                faker.dune().planet(),
-                faker.dune().planet(),
-                faker.dune().planet()
-        );
-        // TODO: make randomizer
-        OfficeEquipment[] array = { laptop, switchEquipment, router, printer, projector, phone, monitor, scanner, tablet, switchEquipment};
+            array[i] = getOfficeEquipment(randomNum);
+        }
+
         return array;
     }
 }
