@@ -44,6 +44,15 @@ public class Methods {
         return oldestYear;
     }
 
+    public static OfficeEquipment findEquipmentOfYear(OfficeEquipment[] officeEquipmentArray, int year) {
+        for (OfficeEquipment officeEquipment: officeEquipmentArray) {
+            if (officeEquipment.getYearOfManufacture() == year) {
+                return officeEquipment;
+            }
+        }
+        return null;
+    }
+
     public static int countOperational(OfficeEquipment[] officeEquipmentArray) {
         int countOperating = 0;
 
