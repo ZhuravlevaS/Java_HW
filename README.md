@@ -1,1 +1,1 @@
-Project for Java Homeworks
+Project for BE Homeworks
