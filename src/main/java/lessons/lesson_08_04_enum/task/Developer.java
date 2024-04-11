@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Developer extends Employee {
-    String programmingLanguage;
+    private String programmingLanguage;
 
     public Developer(String name, int age, double salary, Department department, String programmingLanguage) {
         super(name, age, salary, department);

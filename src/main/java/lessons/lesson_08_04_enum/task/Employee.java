@@ -11,7 +11,7 @@ public class Employee {
     private String name;
     private int age;
     private double salary;
-    Department department;
+    private Department department;
 
     @Override
     public String toString() {
