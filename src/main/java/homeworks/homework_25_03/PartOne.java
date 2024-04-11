@@ -32,7 +32,7 @@ public class PartOne {
     }
 //    2: Найдите максимальный элемент в массиве.
     private static int getMaxElement(int[] array) {
-        int max = array[1];
+        int max = array[0];
 
         for (int elem: array){
             if(elem > max){
