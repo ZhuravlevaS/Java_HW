@@ -9,7 +9,7 @@ public class Task {
                 {15, 21, 28, 33, 36},
                 {24, 29, 44, 55, 66}};
 
-        System.out.println(isNumInclude(array, 21));
+        System.out.println(isNumInclude(array, 15));
     }
     /**
      *
@@ -19,7 +19,7 @@ public class Task {
      */
     private static boolean isNumInclude(int[][] matrix, int number) {
         for (int[] ints : matrix) {
-            for (int j = ints.length - 1; j > 0; j--) {
+            for (int j = ints.length - 1; j >= 0; j--) {
                 if (ints[j] < number) {
                     break;
                 }
