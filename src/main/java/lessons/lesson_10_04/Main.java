@@ -2,63 +2,69 @@ package lessons.lesson_10_04;
 
 import com.github.javafaker.Faker;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class Main {
-
     public static void main(String[] args) {
-        Random random = new Random();
-        Faker faker = new Faker();
-
         int arrayLength = 10;
-        Person[] array = new Person[arrayLength];
+        Person[] array = MockData.createMockArray(arrayLength);
 
-        for (int i = 0; i < arrayLength; i++) {
-            Country[] countries = Country.values();
-            CarBrand[] carBrands =  CarBrand.values();
-            Color[] colors = Color.values();
-            Currency[] currencies = Currency.values();
-
-            int bankAccLength = faker.number().numberBetween(1, 10);
-            BankAccount[] bankAccounts = new BankAccount[bankAccLength];
-
-            for (int j = 0; j < bankAccLength; j++) {
-                bankAccounts[j] = new BankAccount(
-                        currencies[random.nextInt(currencies.length)],
-                        faker.number().randomDouble(2, 2000, 10000),
-                        faker.number().numberBetween(1900, 2000000)
-                );
-            }
-
-            Address address = new Address(
-                    countries[random.nextInt(countries.length)],
-                    faker.address().streetName(),
-                    faker.address().buildingNumber(),
-                    faker.bool().bool(),
-                    faker.number().randomDigitNotZero()
-            );
-
-            Car car = new Car(
-                    carBrands[random.nextInt(carBrands.length)],
-                    faker.number().numberBetween(1, 6),
-                    faker.bool().bool(),
-                    faker.number().numberBetween(10, 600),
-                    faker.number().randomDouble(2, 2000, 10000),
-                    faker.number().numberBetween(1900, 2024),
-                    colors[random.nextInt(colors.length)]
-            );
-
-            array[i] = new Person(
-                    faker.name().firstName(),
-                    faker.name().lastName(),
-                    address,
-                    faker.number().randomDouble(2, 2000, 10000),
-                    car,
-                    bankAccounts
-            );
-        }
         for (int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
+
+//            for (int j = 0; j < array[i].getBankAccounts().length; j++) {
+//                System.out.println(array[i].getBankAccounts()[j].toString());
+//            }
+        }
+
+//      Вывести имена и фамилии всех лиц, чьи автомобили не красные и не спортивные.
+        printNames(array);
+
+//      Найти и вывести среднюю зарплату всех лиц, проживающих в определенной стране.
+        System.out.println("Средняя ЗП по " + Country.UK + ": " + countAverageSalaryCountry(Country.UK, array));
+
+//  Вывести информацию о всех лицах, у которых счет в определенной валюте превышает заданный баланс.
+        printPeopleBigBalance(Currency.BITCOIN, 8000, array);
+    }
+
+
+//  Вывести имена и фамилии всех лиц, чьи автомобили не красные и не спортивные.
+    private static void printNames(Person[] array) {
+        for (Person person: array) {
+            if(!person.getAuto().isSportive() && person.getAuto().getColor() != Color.RED) {
+                System.out.println("Вкус есть у этиго человека: " + person.getName() + ' ' + person.getSurname());
+            }
         }
     }
+//  Найти и вывести среднюю зарплату всех лиц, проживающих в определенной стране.
+    private static double countAverageSalaryCountry(Country country, Person[] array) {
+        double salaries = 0;
+        int countPeople  = 0;
+
+        for (Person person: array) {
+            if (person.getAddress().getCountry() == country) {
+                salaries += person.getSalary();
+                countPeople++;
+            }
+        }
+
+        return countPeople != 0 ? salaries/countPeople : 0;
+    }
+//  Вывести информацию о всех лицах, у которых счет в определенной валюте превышает заданный баланс.
+    private static void  printPeopleBigBalance(Currency currency, double limitBalance, Person[] array) {
+        for (Person person: array) {
+            for (BankAccount bankAccount: person.getBankAccounts()) {
+                if (bankAccount.getCurrency() == currency && bankAccount.getBalance() > limitBalance) {
+                    System.out.println("Слишком много деняк у " + person.toString());
+                }
+            }
+        }
+    }
+//   Перечислить всех, у кого автомобиль был выпущен до определенного года.
+    private static void printPersonCarBeforeYear(Person[] array, int year) {
+
+    }
+
 }
