@@ -89,8 +89,7 @@ public class PartThree {
     private static StringBuilder getBigStr(String[] array) {
         StringBuilder str = new StringBuilder();
         for (String s : array) {
-            char[] charArray = s.toCharArray();
-            for (int j = 0; j < charArray.length; j++) {
+            for (int j = 0; j < s.length(); j++) {
                 str.append(s);
             }
         }
