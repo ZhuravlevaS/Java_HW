@@ -11,6 +11,8 @@ public class MockData {
 
         Person[] array = new Person[arrayLength];
 
+        String[] streets = {"A", "B"};
+        String[] houseNumbers = {"1A", "2B", "5C"};
         for (int i = 0; i < arrayLength; i++) {
             Country[] countries = Country.values();
             CarBrand[] carBrands =  CarBrand.values();
@@ -30,8 +32,8 @@ public class MockData {
 
             Address address = new Address(
                     countries[random.nextInt(countries.length)],
-                    faker.address().streetName(),
-                    faker.address().buildingNumber(),
+                    streets[random.nextInt(streets.length)],
+                    houseNumbers[random.nextInt(houseNumbers.length)],
                     faker.bool().bool(),
                     faker.number().randomDigitNotZero()
             );
@@ -42,7 +44,7 @@ public class MockData {
                     faker.bool().bool(),
                     faker.number().numberBetween(10, 600),
                     faker.number().randomDouble(2, 2000, 10000),
-                    faker.number().numberBetween(1900, 2024),
+                    faker.number().numberBetween(1900, 2025),
                     colors[random.nextInt(colors.length)]
             );
 
@@ -52,7 +54,8 @@ public class MockData {
                     address,
                     faker.number().randomDouble(2, 2000, 10000),
                     car,
-                    bankAccounts
+                    bankAccounts,
+                    countries[random.nextInt(countries.length)]
             );
         }
 
