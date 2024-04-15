@@ -2,7 +2,7 @@ package lessons.lesson_10_04;
 
 import lombok.Getter;
 
-import java.util.Arrays;
+import java.util.List;
 
 
 @Getter
@@ -14,7 +14,7 @@ public class Person {
     private Address address;
     private double salary;
     private Car auto;
-    private BankAccount[] bankAccounts;
+    private List<BankAccount> bankAccounts;
     private Country citizenship;
 
     public void setName(String name) {
@@ -37,7 +37,7 @@ public class Person {
         this.auto = auto;
     }
 
-    public void setBankAccounts(BankAccount[] bankAccounts) {
+    public void setBankAccounts(List<BankAccount> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
 
@@ -45,7 +45,7 @@ public class Person {
         this.citizenship = citizenship;
     }
 
-    public Person(String name, String surname, Address address, double salary, Car auto, BankAccount[] bankAccounts, Country citizenship) {
+    public Person(String name, String surname, Address address, double salary, Car auto, List<BankAccount> bankAccounts, Country citizenship) {
         this.id = countId + 1;
         countId++;
         this.name = name;
@@ -67,7 +67,7 @@ public class Person {
                 ", salary=" + salary +
                 ", citizenship=" + citizenship +
                 ", auto=" + auto.toString() +
-                ", bankAccounts=" + Arrays.toString(bankAccounts) +
+                ", bankAccounts=" + bankAccounts +
                 '}';
     }
 }

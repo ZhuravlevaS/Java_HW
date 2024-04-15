@@ -1,10 +1,12 @@
 package lessons.lesson_10_04;
 
+import java.util.List;
+
 public class SalaryStatistic {
 
     public static void main(String[] args) {
         int arrayLength = 10;
-        Person[] array = MockData.createMockArray(arrayLength);
+        List<Person> array = MockData.createMockArray(arrayLength);
 
         for (Person person : array) {
             System.out.println(person);
@@ -13,7 +15,7 @@ public class SalaryStatistic {
         init(array);
     }
 
-    public static void init(Person[] array) {
+    public static void init(List<Person> array) {
         // Вывести имена лиц, у которых зарплата выше среднего по массиву.
         printPWithBigSalary(array);
 
@@ -23,7 +25,7 @@ public class SalaryStatistic {
     }
 
     //  Найти и вывести среднюю зарплату всех лиц, проживающих в определенной стране.
-    private static double countAverageSalaryCountry(Country country, Person[] array) {
+    private static double countAverageSalaryCountry(Country country, List<Person> array) {
         double salaries = 0;
         int countPeople = 0;
 
@@ -38,13 +40,13 @@ public class SalaryStatistic {
     }
 
     // Вывести имена лиц, у которых зарплата выше среднего по массиву.
-    private static void printPWithBigSalary(Person[] array) {
+    private static void printPWithBigSalary(List<Person> array) {
         double salaries = 0;
         for (Person person : array) {
             salaries += person.getSalary();
         }
 
-        double averageSalary = salaries / array.length;
+        double averageSalary = salaries / array.size();
 
         for (Person person : array) {
             if (person.getSalary() > averageSalary) {
