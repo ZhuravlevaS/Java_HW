@@ -20,8 +20,9 @@ public class Main {
     private static List<Integer> getUnique2(List<Integer> list) {
         List<Integer> newList = new ArrayList<>();
         Collections.sort(list);
+
         for (int i = 0; i < list.size(); i++) {
-            if(newList.size() != 0 && !newList.getLast().equals(list.get(i)) ){
+            if(newList.size() != 0 && !newList.get(newList.size() - 1).equals(list.get(i)) ){
                 newList.add(list.get(i));
             } else if(i == 0){
                 newList.add(list.get(i));
