@@ -1,11 +1,12 @@
 package lessons.lesson_10_04;
 
 import java.util.Date;
+import java.util.List;
 
 public class CarStatistic {
     public static void main(String[] args) {
         int arrayLength = 10;
-        Person[] array = MockData.createMockArray(arrayLength);
+        List<Person> array = MockData.createMockArray(arrayLength);
 
         for (Person person : array) {
             System.out.println(person.getAuto().toString());
@@ -14,7 +15,7 @@ public class CarStatistic {
         init(array);
     }
 
-    public static void init(Person[] array) {
+    public static void init(List<Person> array) {
         //     Вывести имена и фамилии всех лиц, чьи автомобили не красные и не спортивные.
         printNonRedNonSportive(array);
 
@@ -57,7 +58,7 @@ public class CarStatistic {
     }
 
     //  Вывести имена и фамилии всех лиц, чьи автомобили не красные и не спортивные.
-    private static void printNonRedNonSportive(Person[] array) {
+    private static void printNonRedNonSportive(List<Person> array) {
         for (Person person : array) {
             if (!person.getAuto().isSportive() && person.getAuto().getColor() != Color.RED) {
                 System.out.println("автомобили не красные и не спортивные: " + person.getName() + ' ' + person.getSurname());
@@ -66,7 +67,7 @@ public class CarStatistic {
     }
 
     //   Перечислить всех, у кого автомобиль был выпущен до определенного года.
-    private static void printPersonCarBeforeYear(Person[] array, int year) {
+    private static void printPersonCarBeforeYear(List<Person> array, int year) {
         for (Person person : array) {
             if (person.getAuto().getYearOfIssue() < year) {
                 System.out.println("Машина до " + year + " года у " + person.getName() + " " + person.getSurname());
@@ -75,7 +76,7 @@ public class CarStatistic {
     }
 
     //    Вывести список всех лиц без автомобилей (предполагая, что авто может быть null).
-    private static void printNoCarPeople(Person[] array) {
+    private static void printNoCarPeople(List<Person> array) {
         for (Person person : array) {
             if (person.getAuto() == null) {
                 System.out.println("У человека нет машины: " + person);
@@ -84,7 +85,7 @@ public class CarStatistic {
     }
 
     //    Определить количество лиц, имеющих спортивный автомобиль с мощностью более 300 л.с.
-    private static void printWithSportiveCars(Person[] array) {
+    private static void printWithSportiveCars(List<Person> array) {
         int count = 0;
         for (Person person : array) {
             if (person.getAuto().isSportive() && person.getAuto().getCapacity() > 300) {
@@ -95,7 +96,7 @@ public class CarStatistic {
     }
 
     // Вывести список лиц, чьи автомобили являются наиболее мощными в своем классе (спортивные/неспортивные).
-    private static void printMaxCapacityAuto(Person[] array) {
+    private static void printMaxCapacityAuto(List<Person> array) {
         Person maxSportive = null;
         Person maxNonSportive = null;
 
@@ -121,7 +122,7 @@ public class CarStatistic {
 
 
     // Найти лиц с автомобилями определенной марки и цвета.
-    private static void printPeopleAuto(Person[] array, CarBrand carBrand, Color color) {
+    private static void printPeopleAuto(List<Person> array, CarBrand carBrand, Color color) {
         for (Person person : array) {
             if (person.getAuto().getCarBrand() == carBrand && person.getAuto().getColor() == color) {
                 System.out.println("Человек с машиной " + carBrand + " и цвета " + color + ": " + person);
@@ -130,7 +131,7 @@ public class CarStatistic {
     }
 
     // Вывести список лиц, чьи автомобили были куплены новыми (год выпуска авто равен текущему году).
-    private static void printNewCar(Person[] array) {
+    private static void printNewCar(List<Person> array) {
         for (Person person : array) {
             if (person.getAuto().getYearOfIssue() == new Date().getYear() + 1900) {
                 System.out.println("Машины были куплены в этом году: " + person);
@@ -139,7 +140,7 @@ public class CarStatistic {
     }
 
     // Найти лиц, у которых есть автомобиль определенного цвета, но не спортивный.
-    private static void printNonSportiveColor(Person[] array, Color color) {
+    private static void printNonSportiveColor(List<Person> array, Color color) {
         for (Person person : array) {
             if (!person.getAuto().isSportive() && person.getAuto().getColor() == color) {
                 System.out.println("Не спортивный автомобиль цвета " + color + " у " + person);
@@ -148,7 +149,7 @@ public class CarStatistic {
     }
 
     // Найти и вывести лиц, чьи автомобили имеют стоимость выше заданной.
-    private static void printExpensiveCar(Person[] array, double carPrice) {
+    private static void printExpensiveCar(List<Person> array, double carPrice) {
         for (Person person : array) {
             if (person.getAuto().getPrice() > carPrice) {
                 System.out.println("Машина стоимостью выше " + carPrice + " " + person);
@@ -157,7 +158,7 @@ public class CarStatistic {
     }
 
     // Вывести имена и фамилии всех лиц, чьи автомобили имеют четное количество дверей.
-    private static void printEvenDoors(Person[] array) {
+    private static void printEvenDoors(List<Person> array) {
         for (Person person : array) {
             if (person.getAuto().getDoorNumber() % 2 == 0) {
                 System.out.println("четное количество дверей " + person.getName() + " " + person.getSurname());
@@ -166,7 +167,7 @@ public class CarStatistic {
     }
 
     // Вывести список лиц, имеющих автомобили, которые стоят дороже их зарплаты.
-    private static void printCarMoreSalary(Person[] array) {
+    private static void printCarMoreSalary(List<Person> array) {
         for (Person person : array) {
             if (person.getAuto().getPrice() > person.getSalary()) {
                 System.out.println("лицо, имеющих автомобили, которые стоят дороже их зарплаты " + person);
@@ -175,7 +176,7 @@ public class CarStatistic {
     }
 
     // Определить количество лиц, у которых есть автомобили с количеством дверей больше 4.
-    private static void printMore4Doors(Person[] array) {
+    private static void printMore4Doors(List<Person> array) {
         int countCars = 0;
 
         for (Person person : array) {
@@ -187,12 +188,12 @@ public class CarStatistic {
     }
 
     // Вывести список лиц, имеющих автомобиль той же марки, что и автомобиль первого лица в массиве.
-    private static void printSameBrandCar(Person[] array) {
-        Person first = array[0];
+    private static void printSameBrandCar(List<Person> array) {
+        Person first = array.get(0);
 
-        for (int i = 0; i < array.length; i++) {
-            if (i != 0 && first.getAuto().getCarBrand().equals(array[i].getAuto().getCarBrand())) {
-                System.out.println("имеющий автомобиль той же марки, что и автомобиль первого лица в массиве " + array[i]);
+        for (int i = 0; i < array.size(); i++) {
+            if (i != 0 && first.getAuto().getCarBrand().equals(array.get(i).getAuto().getCarBrand())) {
+                System.out.println("имеющий автомобиль той же марки, что и автомобиль первого лица в массиве " + array.get(i));
             }
         }
     }

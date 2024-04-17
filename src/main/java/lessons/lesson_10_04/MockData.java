@@ -2,14 +2,17 @@ package lessons.lesson_10_04;
 
 import com.github.javafaker.Faker;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MockData {
-    public static Person[] createMockArray(int arrayLength){
-        Random random = new Random();
-        Faker faker = new Faker();
+    public static final Random random = new Random();
+    public static final Faker faker = new Faker();
+    public static List<Person> createMockArray(int arrayLength){
 
-        Person[] array = new Person[arrayLength];
+
+        List<Person> array = new ArrayList<>();
 
         String[] streets = {"A", "B"};
         String[] houseNumbers = {"1A", "2B", "5C"};
@@ -20,14 +23,14 @@ public class MockData {
             Currency[] currencies = Currency.values();
 
             int bankAccLength = faker.number().numberBetween(1, 10);
-            BankAccount[] bankAccounts = new BankAccount[bankAccLength];
+            List<BankAccount> bankAccounts = new ArrayList<>();
 
             for (int j = 0; j < bankAccLength; j++) {
-                bankAccounts[j] = new BankAccount(
+                bankAccounts.add(new BankAccount(
                         currencies[random.nextInt(currencies.length)],
                         faker.number().randomDouble(2, 2000, 10000),
                         faker.number().numberBetween(1900, 2000000)
-                );
+                ));
             }
 
             Address address = new Address(
@@ -48,7 +51,7 @@ public class MockData {
                     colors[random.nextInt(colors.length)]
             );
 
-            array[i] = new Person(
+            array.add(new Person(
                     faker.name().firstName(),
                     faker.name().lastName(),
                     address,
@@ -56,7 +59,7 @@ public class MockData {
                     car,
                     bankAccounts,
                     countries[random.nextInt(countries.length)]
-            );
+            ));
         }
 
         return array;
