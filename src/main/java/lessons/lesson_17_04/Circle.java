@@ -1,13 +1,22 @@
 package lessons.lesson_17_04;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
-@ToString
-@AllArgsConstructor
+
 @Getter
 public class Circle extends Figure {
-    private Color color;
     private int radius;
+
+    public Circle(Color color, int radius) {
+        super(color);
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "color=" + super.getColor() +
+                ", radius=" + radius +
+                '}';
+    }
 }

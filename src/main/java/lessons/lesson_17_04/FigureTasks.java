@@ -22,10 +22,12 @@ public class FigureTasks {
         //System.out.println(hasRectangleAndTriangleOfSameColor(figures));
         //System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
 
-        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
+//        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
+       // printFiguresWithAtLeastOneMatchingParameter(figures);
+        System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
     }
 
-    // ****************** Basic Tasks ******************
+    // ****************** Basic Tasks(DONE) ******************
 
     /**
      * 1. Напишите метод для подсчета всех кругов заданного цвета в списке фигур.
@@ -111,7 +113,7 @@ public class FigureTasks {
         return false;
     }
 
-    // ****************** Intermediate Tasks ******************
+    // ****************** Intermediate Tasks (DONE)  ******************
 
     /**
      * 6. Напишите метод для нахождения круга с минимальным радиусом среди кругов заданного цвета.
@@ -178,7 +180,7 @@ public class FigureTasks {
         return circleList;
     }
 
-    // ****************** Upper Intermediate Tasks ******************
+    // ****************** Upper Intermediate Tasks (DONE)  ******************
 
     /**
      * 9. Напишите метод для нахождения треугольника, у которого разница между
@@ -218,19 +220,104 @@ public class FigureTasks {
      * (цвет, радиус, сторона) совпадает с аналогичным параметром другой фигуры.
      */
     public static void printFiguresWithAtLeastOneMatchingParameter(List<Figure> figures) {
+
+        for (int i = 0; i < figures.size(); i++) {
+            for (int j = 0; j < figures.size(); j++) {
+                if(i != j) {
+                    if(figuresMatch(figures.get(i), figures.get(j))){
+                        System.out.println("фигуры совпали: ");
+                        System.out.println(figures.get(i));
+                        System.out.println(figures.get(j));
+                    }
+                }
+            }
+        }
     }
 
     // Helper method to determine if two figures have at least one matching parameter
-    private static boolean figuresMatch(Figure a, Figure b) {
+    private static boolean figuresMatch(Figure figure1, Figure figure2) {
+        if(figure1.getColor() == figure2.getColor()){
+            return true;
+        }
+        if(figure1 instanceof Circle) {
+            int radius = ((Circle) figure1).getRadius();
+
+            return figureParamMatch(radius, figure2);
+        }
+        if (figure1 instanceof Rectangle){
+            int hight = ((Rectangle) figure1).getHight();
+            int width = ((Rectangle) figure1).getWidth();
+
+            return figureParamMatch(hight, figure2) || figureParamMatch(width, figure2);
+        }
+        if (figure1 instanceof Triangle) {
+            int side1 = ((Triangle) figure1).getSide1();
+            int side2 = ((Triangle) figure1).getSide2();
+            int side3 = ((Triangle) figure1).getSide3();
+
+            return figureParamMatch(side1, figure2) ||
+                    figureParamMatch(side2, figure2) ||
+                    figureParamMatch(side3, figure2);
+
+        }
         return false;
     }
+
+    private static boolean figureParamMatch(int param, Figure figure) {
+        if( figure instanceof Triangle) {
+            return triangleMatch(param, (Triangle) figure);
+        }
+        if (figure instanceof Circle) {
+            return circleMatch(param, (Circle) figure);
+        }
+        if (figure instanceof Rectangle) {
+            return rectangleMatch(param, (Rectangle) figure);
+        }
+        return false;
+    }
+
+
+    private static boolean rectangleMatch(int param, Rectangle rectangle){
+        return param == rectangle.getHight() || param == rectangle.getWidth();
+    }
+
+    private static boolean triangleMatch(int param, Triangle triangle) {
+        return param == triangle.getSide1() || param == triangle.getSide2() || param == triangle.getSide3();
+    }
+
+    private static boolean circleMatch(int param, Circle circle) {
+        return param == circle.getRadius();
+    }
+
+
 
     /**
      * 11. Напишите метод для нахождения кругов, у которых радиус больше суммы сторон любого треугольника в списке.
      */
     public static List<Circle> findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(List<Figure> figures) {
+        List<Circle> circleList = new ArrayList<>();
 
-        return null;
+        for (Figure figure: figures) {
+            if (figure instanceof Circle) {
+                boolean isRadiusBigger = true;
+                int radius = ((Circle) figure).getRadius();
+
+                for (Figure figure1: figures) {
+                    if (figure1 instanceof Triangle) {
+                        int sidesSum = ((Triangle) figure1).getSide1() + ((Triangle) figure1).getSide2()+ ((Triangle) figure1).getSide3();
+                        if(radius < sidesSum) {
+                            isRadiusBigger = false;
+                            break;
+                        }
+                    }
+                }
+
+                if(isRadiusBigger) {
+                    circleList.add((Circle) figure);
+                }
+            }
+        }
+        return circleList;
     }
 
     // ****************** Advanced Tasks ******************
@@ -238,11 +325,13 @@ public class FigureTasks {
     /**
      * 12. Напишите метод для нахождения круга, который можно вписать в
      * наибольшее количество треугольников, учитывая их углы и стороны.
+     *
+     *
+     * радиус вписанной окружности https://geleot.ru/education/math/geometry/inradius_and_circumradius/inradius_triangle
      */
     public static Circle findCircleThatFitsMostTriangles(List<Figure> figures) {
         return null;
     }
-
 
     /**
      * 13. Напишите метод для определения треугольника с наименьшим углом, вписывающимся в заданный круг.
@@ -263,7 +352,7 @@ public class FigureTasks {
 
     /**
      * 15. Напишите метод для определения, можно ли составить
-     * из треугольников полигон без промежутков и наружных выступов.
+     * из 2х треугольников прямоугольник или квадрат без промежутков и наружных выступов.
      */
     public static boolean canFormClosedPolygonFromTriangles(List<Figure> figures) {
         return true;
