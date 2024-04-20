@@ -12,6 +12,10 @@ public class Circle extends Figure {
         this.radius = radius;
     }
 
+    public double getSquare() {
+        return Math.PI * radius * radius;
+    }
+
     @Override
     public String toString() {
         return "Circle{" +

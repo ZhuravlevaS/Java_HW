@@ -10,6 +10,10 @@ public class Rectangle extends Figure {
     private int width;
     private int hight;
 
+    public double getSquare() {
+        return width * hight;
+    }
+
     public Rectangle(Color color, int width, int hight) {
         super(color);
         this.width = width;

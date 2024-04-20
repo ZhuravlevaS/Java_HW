@@ -23,8 +23,11 @@ public class FigureTasks {
         //System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
 
 //        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
-       // printFiguresWithAtLeastOneMatchingParameter(figures);
-        System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
+        // printFiguresWithAtLeastOneMatchingParameter(figures);
+        //System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
+
+       // System.out.println(findCircleThatFitsMostTriangles(figures));
+        System.out.println(findSmallestAngleTriangleInCircle(new Circle(Color.BLUE, 30),figures ));
     }
 
     // ****************** Basic Tasks(DONE) ******************
@@ -121,8 +124,7 @@ public class FigureTasks {
     public static Circle findCircleWithMinRadiusOfColor(List<Figure> figures, Color color) {
         Circle minRadiusCircle = null;
         for (Figure figure : figures) {
-            if (figure instanceof Circle && ((Circle) figure).getColor() == color) {
-                Circle circle = (Circle) figure;
+            if (figure instanceof Circle circle && circle.getColor() == color) {
                 if (minRadiusCircle == null) {
                     minRadiusCircle = circle;
                 } else if (minRadiusCircle.getRadius() > circle.getRadius()) {
@@ -168,8 +170,8 @@ public class FigureTasks {
                         int radius = circle.getRadius();
 
                         if (radius == triangle.getSide1() ||
-                            radius == triangle.getSide2() ||
-                            radius == triangle.getSide3()) {
+                                radius == triangle.getSide2() ||
+                                radius == triangle.getSide3()) {
                             circleList.add(circle);
                         }
                     }
@@ -198,7 +200,7 @@ public class FigureTasks {
                     difference = getDiffMaxMinSidesTriangle(current);
                 } else {
                     int currentDiff = getDiffMaxMinSidesTriangle(current);
-                    if(difference > currentDiff) {
+                    if (difference > currentDiff) {
                         minDifftriangle = current;
                         difference = currentDiff;
                     }
@@ -223,8 +225,8 @@ public class FigureTasks {
 
         for (int i = 0; i < figures.size(); i++) {
             for (int j = 0; j < figures.size(); j++) {
-                if(i != j) {
-                    if(figuresMatch(figures.get(i), figures.get(j))){
+                if (i != j) {
+                    if (figuresMatch(figures.get(i), figures.get(j))) {
                         System.out.println("фигуры совпали: ");
                         System.out.println(figures.get(i));
                         System.out.println(figures.get(j));
@@ -236,15 +238,15 @@ public class FigureTasks {
 
     // Helper method to determine if two figures have at least one matching parameter
     private static boolean figuresMatch(Figure figure1, Figure figure2) {
-        if(figure1.getColor() == figure2.getColor()){
+        if (figure1.getColor() == figure2.getColor()) {
             return true;
         }
-        if(figure1 instanceof Circle) {
+        if (figure1 instanceof Circle) {
             int radius = ((Circle) figure1).getRadius();
 
             return figureParamMatch(radius, figure2);
         }
-        if (figure1 instanceof Rectangle){
+        if (figure1 instanceof Rectangle) {
             int hight = ((Rectangle) figure1).getHight();
             int width = ((Rectangle) figure1).getWidth();
 
@@ -264,7 +266,7 @@ public class FigureTasks {
     }
 
     private static boolean figureParamMatch(int param, Figure figure) {
-        if( figure instanceof Triangle) {
+        if (figure instanceof Triangle) {
             return triangleMatch(param, (Triangle) figure);
         }
         if (figure instanceof Circle) {
@@ -277,7 +279,7 @@ public class FigureTasks {
     }
 
 
-    private static boolean rectangleMatch(int param, Rectangle rectangle){
+    private static boolean rectangleMatch(int param, Rectangle rectangle) {
         return param == rectangle.getHight() || param == rectangle.getWidth();
     }
 
@@ -290,29 +292,28 @@ public class FigureTasks {
     }
 
 
-
     /**
      * 11. Напишите метод для нахождения кругов, у которых радиус больше суммы сторон любого треугольника в списке.
      */
     public static List<Circle> findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(List<Figure> figures) {
         List<Circle> circleList = new ArrayList<>();
 
-        for (Figure figure: figures) {
+        for (Figure figure : figures) {
             if (figure instanceof Circle) {
                 boolean isRadiusBigger = true;
                 int radius = ((Circle) figure).getRadius();
 
-                for (Figure figure1: figures) {
+                for (Figure figure1 : figures) {
                     if (figure1 instanceof Triangle) {
-                        int sidesSum = ((Triangle) figure1).getSide1() + ((Triangle) figure1).getSide2()+ ((Triangle) figure1).getSide3();
-                        if(radius < sidesSum) {
+                        int sidesSum = ((Triangle) figure1).getSide1() + ((Triangle) figure1).getSide2() + ((Triangle) figure1).getSide3();
+                        if (radius < sidesSum) {
                             isRadiusBigger = false;
                             break;
                         }
                     }
                 }
 
-                if(isRadiusBigger) {
+                if (isRadiusBigger) {
                     circleList.add((Circle) figure);
                 }
             }
@@ -325,20 +326,105 @@ public class FigureTasks {
     /**
      * 12. Напишите метод для нахождения круга, который можно вписать в
      * наибольшее количество треугольников, учитывая их углы и стороны.
-     *
-     *
-     * радиус вписанной окружности https://geleot.ru/education/math/geometry/inradius_and_circumradius/inradius_triangle
      */
     public static Circle findCircleThatFitsMostTriangles(List<Figure> figures) {
-        return null;
+        Circle circle = null;
+        int countTriangles = 0;
+
+        for (Figure figure : figures) {
+
+            if (figure instanceof Circle) {
+                Circle circleCurrent = (Circle) figure;
+                int count = 0;
+                Circle circleFit = null;
+
+                for (Figure figure1 : figures) {
+                    if (figure1 instanceof Triangle) {
+                        Triangle triangle = (Triangle) figure1;
+                        double radius = getCircleRInTriangle(triangle.getSide1(), triangle.getSide2(), triangle.getSide3());
+                        System.out.println(radius);
+                        if (Double.valueOf((double) circleCurrent.getRadius()).equals(radius)) {
+                            circleFit = circleCurrent;
+                            count++;
+                        }
+                    }
+                }
+
+                if (circle != null && circleFit != null && count > countTriangles) {
+                    circle = circleCurrent;
+                    countTriangles = count;
+                } else if (circle == null && count != 0) {
+                    circle = circleCurrent;
+                    countTriangles = count;
+                }
+                count = 0;
+            }
+
+        }
+        return circle;
+    }
+
+    private static double getCircleRInTriangle(int side1, int side2, int side3) {
+        double p = (double) (side1 + side2 + side3) / 2;
+        return Math.sqrt(((p - side1) * (p - side2) * (p - side3)) / p);
+
     }
 
     /**
      * 13. Напишите метод для определения треугольника с наименьшим углом, вписывающимся в заданный круг.
      */
     public static Triangle findSmallestAngleTriangleInCircle(Circle circle, List<Figure> figures) {
-        return null;
+        List<Triangle> triangles = new ArrayList<>();
+
+        Triangle minAngleTriangle = null;
+        double min = 0;
+
+        for (Figure figure:figures) {
+            if (figure instanceof Triangle triangle){
+
+                double radius = (triangle.getSide1() * triangle.getSide2()* triangle.getSide3())/(4* triangle.getSquare());
+                if (Double.valueOf(circle.getRadius()).equals(radius)) {
+                    triangles.add(triangle);
+                }
+            }
+        }
+
+        if(triangles.size() == 1) {
+            return triangles.get(0);
+        }
+
+        if(triangles.size() > 1) {
+            for (Triangle triangle: triangles){
+                double cosA = getCos(triangle.getSide1(), triangle.getSide2(), triangle.getSide3());
+                double cosB = getCos(triangle.getSide1(), triangle.getSide3(), triangle.getSide2());
+                double cosC = getCos(triangle.getSide2(), triangle.getSide3(), triangle.getSide1());
+
+                double minAngle = 0;
+
+                if(cosA < cosB && cosA < cosC) {
+                    minAngle = cosA;
+                } else if(cosB < cosC) {
+                    minAngle = cosB;
+                } else {
+                    minAngle = cosC;
+                }
+
+                if (minAngleTriangle == null) {
+                    minAngleTriangle = triangle;
+                    min = minAngle;
+                } else if (min > minAngle) {
+                    minAngleTriangle = triangle;
+                    min = minAngle;
+                }
+            }
+        }
+        return minAngleTriangle;
     }
+
+    private static double getCos(int a, int b, int c) {
+        return (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2))/(2 * a * b);
+    }
+
 
     // ****************** Expert Tasks ******************
 
