@@ -14,20 +14,21 @@ public class FigureTasks {
 
         System.out.println("******************");
 
-        //System.out.println(countCirclesOfColor(figures, Color.BLUE));
-        //System.out.println(findRectangleWithMaxArea(figures));
+        System.out.println(countCirclesOfColor(figures, Color.BLUE));
+        System.out.println(findRectangleWithMaxArea(figures));
 
-        //printEquilateralTriangles(figures);
-        //System.out.println(sumOfRadiiForColor(figures, Color.BLUE));
-        //System.out.println(hasRectangleAndTriangleOfSameColor(figures));
-        //System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
+        printEquilateralTriangles(figures);
+        System.out.println(sumOfRadiiForColor(figures, Color.BLUE));
+        System.out.println(hasRectangleAndTriangleOfSameColor(figures));
+        System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
 
-//        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
-        // printFiguresWithAtLeastOneMatchingParameter(figures);
-        //System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
+        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
+        printFiguresWithAtLeastOneMatchingParameter(figures);
+        System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
 
-       // System.out.println(findCircleThatFitsMostTriangles(figures));
+        System.out.println(findCircleThatFitsMostTriangles(figures));
         System.out.println(findSmallestAngleTriangleInCircle(new Circle(Color.BLUE, 30),figures ));
+        System.out.println(findCircleWithSmallestAreaToRadiusRatio(figures));
     }
 
     // ****************** Basic Tasks(DONE) ******************
@@ -99,14 +100,11 @@ public class FigureTasks {
      * 5. Напишите метод для определения, есть ли в списке фигур прямоугольник и треугольник одинакового цвета.
      */
     public static boolean hasRectangleAndTriangleOfSameColor(List<Figure> figures) {
-
-        for (Figure figure : figures) {
-            if (figure instanceof Rectangle) {
+        for (Figure figure: figures) {
+            if (figure instanceof Rectangle currentRectangle) {
                 for (Figure figure1 : figures) {
                     if (figure1 instanceof Triangle currentTriangle) {
-                        Rectangle currentRectangle = (Rectangle) figure;
-
-                        if (currentTriangle.getColor() == currentRectangle.getColor()) {
+                        if (currentTriangle.getColor().equals(currentRectangle.getColor())) {
                             return true;
                         }
                     }
@@ -142,9 +140,7 @@ public class FigureTasks {
         int count = 0;
 
         for (Figure figure : figures) {
-            if (figure instanceof Triangle) {
-                Triangle triangle = (Triangle) figure;
-
+            if (figure instanceof Triangle triangle) {
                 if (triangle.getSide1() > length || triangle.getSide2() > length || triangle.getSide3() > length) {
                     count++;
                 }
@@ -433,7 +429,17 @@ public class FigureTasks {
      * у которого соотношение площади к радиусу является наименьшим среди всех кругов.
      */
     public static Circle findCircleWithSmallestAreaToRadiusRatio(List<Figure> figures) {
-        return null;
+        Circle min = null;
+        for (Figure figure: figures) {
+            if (figure instanceof Circle circle) {
+                if(min == null) {
+                    min = circle;
+                } else if(min.getSquare()/min.getRadius() > circle.getSquare()/circle.getRadius()) {
+                    min = circle;
+                }
+            }
+        }
+        return min;
     }
 
     /**

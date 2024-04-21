@@ -6,10 +6,11 @@ import lombok.Getter;
 
 
 @Getter
-public class Rectangle extends Figure {
+public class Rectangle extends Figure  implements FigureMethods {
     private int width;
     private int hight;
 
+    @Override
     public double getSquare() {
         return width * hight;
     }

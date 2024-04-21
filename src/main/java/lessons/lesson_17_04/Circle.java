@@ -4,7 +4,7 @@ import lombok.Getter;
 
 
 @Getter
-public class Circle extends Figure {
+public class Circle extends Figure implements FigureMethods{
     private int radius;
 
     public Circle(Color color, int radius) {
@@ -12,6 +12,7 @@ public class Circle extends Figure {
         this.radius = radius;
     }
 
+    @Override
     public double getSquare() {
         return Math.PI * radius * radius;
     }

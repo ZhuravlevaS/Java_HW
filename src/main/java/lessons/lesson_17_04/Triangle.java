@@ -4,11 +4,12 @@ import lombok.Getter;
 
 
 @Getter
-public class Triangle extends Figure {
+public class Triangle extends Figure  implements FigureMethods{
     private int side1;
     private int side2;
     private int side3;
 
+    @Override
     public double getSquare() {
         double p = (double) (side1 + side2 + side3) / 2;
 
