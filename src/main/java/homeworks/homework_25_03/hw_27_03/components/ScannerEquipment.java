@@ -1,6 +1,6 @@
-package homeworks.hw_27_03.components;
+package homeworks.homework_25_03.hw_27_03.components;
 
-public class Scanner extends OfficeEquipment {
+public class ScannerEquipment extends OfficeEquipment {
     private String scanResolution;
     private int scanSpeed;
     private String colorDepth;
@@ -9,19 +9,19 @@ public class Scanner extends OfficeEquipment {
     private boolean isDuplexScanning;
     private String scannerType;
 
-    public Scanner(String modelName,
-                   String manufacturer,
-                   int yearOfManufacture,
-                   double price,
-                   double weight,
-                   boolean isOperational,
-                   String scanResolution,
-                   int scanSpeed,
-                   String colorDepth,
-                   String maxPaperSize,
-                   String connectivity,
-                   boolean isDuplexScanning,
-                   String scannerType) {
+    public ScannerEquipment(String modelName,
+                            String manufacturer,
+                            int yearOfManufacture,
+                            double price,
+                            double weight,
+                            boolean isOperational,
+                            String scanResolution,
+                            int scanSpeed,
+                            String colorDepth,
+                            String maxPaperSize,
+                            String connectivity,
+                            boolean isDuplexScanning,
+                            String scannerType) {
         super(modelName, manufacturer, yearOfManufacture, price, weight, isOperational);
         this.scanResolution = scanResolution;
         this.scanSpeed = scanSpeed;

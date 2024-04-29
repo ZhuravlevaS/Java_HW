@@ -1,6 +1,6 @@
-package homeworks.hw_27_03.utils;
+package homeworks.homework_25_03.hw_27_03.utils;
 
-import homeworks.hw_27_03.components.OfficeEquipment;
+import homeworks.homework_25_03.hw_27_03.components.OfficeEquipment;
 
 import java.util.Arrays;
 import java.util.Objects;

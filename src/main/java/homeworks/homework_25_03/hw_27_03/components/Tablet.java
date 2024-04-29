@@ -1,33 +1,33 @@
-package homeworks.hw_27_03.components;
-// TODO: rewrite using build pattern for child classes
-public class Phone extends OfficeEquipment {
+package homeworks.homework_25_03.hw_27_03.components;
+
+public class Tablet extends OfficeEquipment {
     private String screenSize;
     private int storageSize;
     private String operatingSystem;
     private int batteryLife;
-    private boolean isSmart;
+    private boolean isCellular;
     private String cameraResolution;
     private String processorType;
 
-    public Phone(String modelName,
-                 String manufacturer,
-                 int yearOfManufacture,
-                 double price,
-                 double weight,
-                 boolean isOperational,
-                 String screenSize,
-                 int storageSize,
-                 String operatingSystem,
-                 int batteryLife,
-                 boolean isSmart,
-                 String cameraResolution,
-                 String processorType) {
+    public Tablet(String modelName,
+                  String manufacturer,
+                  int yearOfManufacture,
+                  double price,
+                  double weight,
+                  boolean isOperational,
+                  String screenSize,
+                  int storageSize,
+                  String operatingSystem,
+                  int batteryLife,
+                  boolean isCellular,
+                  String cameraResolution,
+                  String processorType) {
         super(modelName, manufacturer, yearOfManufacture, price, weight, isOperational);
         this.screenSize = screenSize;
         this.storageSize = storageSize;
         this.operatingSystem = operatingSystem;
         this.batteryLife = batteryLife;
-        this.isSmart = isSmart;
+        this.isCellular = isCellular;
         this.cameraResolution = cameraResolution;
         this.processorType = processorType;
     }
@@ -64,12 +64,12 @@ public class Phone extends OfficeEquipment {
         this.batteryLife = batteryLife;
     }
 
-    public boolean isSmart() {
-        return isSmart;
+    public boolean isCellular() {
+        return isCellular;
     }
 
-    public void setSmart(boolean smart) {
-        isSmart = smart;
+    public void setCellular(boolean cellular) {
+        isCellular = cellular;
     }
 
     public String getCameraResolution() {
@@ -91,12 +91,12 @@ public class Phone extends OfficeEquipment {
     @Override
     public String toString() {
         String superStr = super.toString();
-        return superStr + " Phone{" +
+        return superStr + "Tablet{" +
                 "screenSize='" + screenSize + '\'' +
                 ", storageSize=" + storageSize +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 ", batteryLife=" + batteryLife +
-                ", isSmart=" + isSmart +
+                ", isCellular=" + isCellular +
                 ", cameraResolution='" + cameraResolution + '\'' +
                 ", processorType='" + processorType + '\'' +
                 '}';

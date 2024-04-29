@@ -1,4 +1,4 @@
-package homeworks.hw_27_03.components;
+package homeworks.homework_25_03.hw_27_03.components;
 
 public class Switch extends OfficeEquipment{
     private int portCount;

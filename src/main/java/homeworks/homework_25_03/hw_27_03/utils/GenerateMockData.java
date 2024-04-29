@@ -1,7 +1,7 @@
-package homeworks.hw_27_03.utils;
+package homeworks.homework_25_03.hw_27_03.utils;
 
 import com.github.javafaker.Faker;
-import homeworks.hw_27_03.components.*;
+import homeworks.homework_25_03.hw_27_03.components.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -63,7 +63,7 @@ public class GenerateMockData {
                         faker.dune().character()
                 );
             case 3:
-                return new Scanner(
+                return new ScannerEquipment(
                         faker.name().firstName(),
                         faker.name().lastName(),
                         faker.date().between(date, date1).getYear(),

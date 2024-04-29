@@ -1,8 +1,8 @@
-package homeworks.hw_27_03;
+package homeworks.homework_25_03.hw_27_03;
 
-import homeworks.hw_27_03.components.OfficeEquipment;
-import homeworks.hw_27_03.utils.GenerateMockData;
-import homeworks.hw_27_03.utils.Methods;
+import homeworks.homework_25_03.hw_27_03.components.OfficeEquipment;
+import homeworks.homework_25_03.hw_27_03.utils.GenerateMockData;
+import homeworks.homework_25_03.hw_27_03.utils.Methods;
 
 import java.util.Objects;
 
