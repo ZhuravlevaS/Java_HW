@@ -21,13 +21,24 @@ public class Famous {
             }
         }
 
-        if(isFamous){
+        if(isFamous && checkIsFamous(famous[first], first, famous)){
             f = famous[first];
         } else {
             System.out.println("Похоже, что знаменитости нет");
         }
 
         return f;
+    }
+
+    private boolean checkIsFamous(Famous famous, int famousIdx, Famous[] famousArray) {
+        boolean isFamous = true;
+        for (int i = 0; i < famousArray.length; i++) {
+            if (i != famousIdx && famous.knows(famousArray[i])){
+                isFamous = false;
+            }
+        }
+
+        return isFamous;
     }
 
     private boolean knows(Famous famous) {
