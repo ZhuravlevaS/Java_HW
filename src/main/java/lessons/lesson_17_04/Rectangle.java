@@ -15,6 +15,11 @@ public class Rectangle extends Figure  implements FigureMethods {
         return width * hight;
     }
 
+    @Override
+    public double getPerimetr() {
+        return (width*2)+ (hight*2);
+    }
+
     public Rectangle(Color color, int width, int hight) {
         super(color);
         this.width = width;

@@ -18,6 +18,11 @@ public class Circle extends Figure implements FigureMethods{
     }
 
     @Override
+    public double getPerimetr() {
+        return 2*Math.PI*radius;
+    }
+
+    @Override
     public String toString() {
         return "Circle{" +
                 "color=" + super.getColor() +
