@@ -1,8 +1,6 @@
 package lessons.lesson_16_04;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,10 +11,20 @@ public class Main {
             list.add(2);
             list.add(3);
         System.out.println(getUnique2(list));
+        System.out.println(getUnique1(list));
+        System.out.println(getUnique(list));
+    }
+    private static List<Object> getUnique(List<Integer> list) {
+        Object[] i = list.toArray();
+        return  Arrays.stream(i)
+                .distinct()
+                .toList();
     }
 
-
-
+    private static List<Integer> getUnique1(List<Integer> list) {
+        Set<Integer> set = new HashSet<>(list);
+        return set.stream().toList();
+    }
     private static List<Integer> getUnique2(List<Integer> list) {
         List<Integer> newList = new ArrayList<>();
         Collections.sort(list);
