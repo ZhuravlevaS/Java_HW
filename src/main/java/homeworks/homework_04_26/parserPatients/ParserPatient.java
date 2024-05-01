@@ -4,7 +4,7 @@ import homeworks.homework_04_26.Patient;
 import java.time.LocalDate;
 
 
-public class Parser {
+public class ParserPatient {
     public static Patient parsePatients(String patient){
         String[] patientArray = patient.split(" ");
 
@@ -15,5 +15,5 @@ public class Parser {
                 LocalDate.parse(patientArray[3]));
     }
 
-    private Parser(){}
+    private ParserPatient(){}
 }

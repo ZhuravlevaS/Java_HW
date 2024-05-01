@@ -1,8 +1,9 @@
-package lessons.lesson_04_26;
+package homeworks.homework_04_26;
 
 
 
-import lessons.lesson_04_26.parserPatients.ParserPations;
+
+import homeworks.homework_04_26.parserPatients.ParserPatient;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 //1 Создать класс Patient
 //2 Сделать парсер из строки в Patient
 //3 Сделать картотеку, которая находит пациентов по id или имени и фамилии.
-public class Clinik {
+public class Hospital {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(Path.of("patiens"));
         List<String> readList = new ArrayList<>();
@@ -24,11 +25,14 @@ public class Clinik {
 
         System.out.println(readList);
 
-        Cartoteka cartoteka = new Cartoteka(ParserPations.parsePatients(readList));
+        List<Patient> patients = new ArrayList<>();
 
-        System.out.println(cartoteka.searchPatientById("5"));
-        System.out.println(cartoteka.searchPatientByNameOrSurname("Mitakov"));
+        for (String s: readList){
+            patients.add(ParserPatient.parsePatients(s));
+        }
 
-
+        CardIndex cardIndex = new CardIndex(patients);
+        System.out.println(cardIndex.searchPatientById(5));
+        System.out.println(cardIndex.searchPatientByNameOrSurname("Ale"));
     }
 }
