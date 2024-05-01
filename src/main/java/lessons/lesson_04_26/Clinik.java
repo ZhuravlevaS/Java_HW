@@ -2,7 +2,7 @@ package lessons.lesson_04_26;
 
 
 
-import lessons.lesson_04_26.parserPatients.Parser;
+import lessons.lesson_04_26.parserPatients.ParserPations;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -24,7 +24,7 @@ public class Clinik {
 
         System.out.println(readList);
 
-        Cartoteka cartoteka = new Cartoteka(Parser.parsePatients(readList));
+        Cartoteka cartoteka = new Cartoteka(ParserPations.parsePatients(readList));
 
         System.out.println(cartoteka.searchPatientById("5"));
         System.out.println(cartoteka.searchPatientByNameOrSurname("Mitakov"));
