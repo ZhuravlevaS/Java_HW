@@ -41,7 +41,6 @@ public class BNode {
         return search(bNode.right, value);
     }
 
-    //todo
     private static BNode getMin(BNode bNode) {
         if(isNodeExist(bNode.left)) {
             getMin(bNode.left);
@@ -49,7 +48,6 @@ public class BNode {
         return bNode;
     }
 
-    //todo
     private static BNode getMax(BNode bNode) {
         if(isNodeExist(bNode.right)) {
             getMax(bNode.right);
@@ -58,7 +56,7 @@ public class BNode {
         return bNode;
     }
 
-    //sort todo
+    //sort
     private static void inOrderTraversal(BNode bNode) {
         if(!isNodeExist(bNode)) {
             return;
@@ -69,7 +67,7 @@ public class BNode {
         inOrderTraversal(bNode.right);
     }
 
-    //del todo
+    //del
     private static void postOrderTraversal(BNode bNode) {
         if(!isNodeExist(bNode)) {
             return;
@@ -91,7 +89,6 @@ public class BNode {
         preOrderTraversal(bNode.right);
     }
 
-    //todo
     private static int getChildCount(BNode bNode) {
         int count = 0;
         countChildren(count, bNode);
@@ -108,32 +105,27 @@ public class BNode {
         countChildren(count, bNode.right);
     }
 
-    //todo
     private static void removeNodeWithOneOrZeroChild(BNode bNodeToDelete) {
-        if(!(isNodeExist(bNodeToDelete.left) && isNodeExist(bNodeToDelete))) {
-           bNodeToDelete = null;
-        }
+       if (isNodeExist(bNodeToDelete)){
+           if(!isNodeExist(bNodeToDelete.left) && !isNodeExist(bNodeToDelete.right)) {
+               bNodeToDelete = null;
+           } else if (isNodeExist(bNodeToDelete.right)) {
+               bNodeToDelete = bNodeToDelete.right;
+           } else {
+               bNodeToDelete = bNodeToDelete.left;
+           }
+       }
+
     }
 
-    //todo
     private static boolean remove(BNode root, int value) {
-        if(!isNodeExist(root)) {
-            return false;
+        BNode nodeToDelete = search(root, value);
+        if (isNodeExist(nodeToDelete)) {
+            removeNodeWithOneOrZeroChild(nodeToDelete);
+            return true;
         }
 
-        if (root.value.equals(value)){
-            root = null;
-        }
-
-        if (root.value > value) {
-            remove(root.right, value);
-        }
-
-        if (root.value < value) {
-            remove(root.left, value);
-        }
-
-        return true;
+        return false;
     }
 
 
