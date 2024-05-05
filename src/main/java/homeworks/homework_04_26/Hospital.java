@@ -3,7 +3,7 @@ package homeworks.homework_04_26;
 
 
 
-import homeworks.homework_04_26.parserPatients.ParserPatient;
+import homeworks.homework_04_26.patientsParser.PatientParse;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,7 +28,7 @@ public class Hospital {
         List<Patient> patients = new ArrayList<>();
 
         for (String s: readList){
-            patients.add(ParserPatient.parsePatients(s));
+            patients.add(PatientParse.parsePatients(s));
         }
 
         CardIndex cardIndex = new CardIndex(patients);

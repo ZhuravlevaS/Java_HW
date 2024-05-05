@@ -1,10 +1,10 @@
-package homeworks.homework_04_26.parserPatients;
+package homeworks.homework_04_26.patientsParser;
 import homeworks.homework_04_26.Patient;
 
 import java.time.LocalDate;
 
 
-public class ParserPatient {
+public class PatientParse {
     public static Patient parsePatients(String patient){
         String[] patientArray = patient.split(" ");
 
@@ -15,5 +15,5 @@ public class ParserPatient {
                 LocalDate.parse(patientArray[3]));
     }
 
-    private ParserPatient(){}
+    private PatientParse(){}
 }
