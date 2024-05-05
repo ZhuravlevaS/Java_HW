@@ -12,11 +12,12 @@ public class MapTasks {
             System.out.println(figure);
         }
 
-        System.out.println(countCirclesOfColor(figures));
-        System.out.println(sumOfRadiiForColor(figures));
-        System.out.println(findRectangleWithLargestDiagonalToPerimeterRatio(figures));
-        System.out.println(hasRectangleAndTriangleOfSameColor(figures));
-        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
+//        System.out.println(countCirclesOfColor(figures));
+//        System.out.println(sumOfRadiiForColor(figures));
+//        System.out.println(findRectangleWithLargestDiagonalToPerimeterRatio(figures));
+//        System.out.println(hasRectangleAndTriangleOfSameColor(figures));
+//        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
+        System.out.println(getAverageRadiusCirclesByColors1(figures));
     }
 
     //Count circles of a given color:
@@ -103,6 +104,7 @@ public class MapTasks {
     //Determine if there's a rectangle and triangle of the same color:
     public static Map<Color, Boolean> hasRectangleAndTriangleOfSameColor(List<Figure> figures) {
         Map<Color, Boolean> matches = new HashMap<>();
+
         for (Figure figure: figures) {
             if (figure instanceof Rectangle currentRectangle) {
                 for (Figure figure1 : figures) {
@@ -115,5 +117,76 @@ public class MapTasks {
             }
         }
         return matches;
+    }
+
+    // Calculate Average Radius of Circles Grouped by Color:
+    public static Map<Color, RadiusInfo> getAverageRadiusCirclesByColors(List<Figure> figures) {
+        Map<Color, RadiusInfo> averageRadius = new HashMap<>();
+            for (Figure figure: figures) {
+                if (figure instanceof Circle circle) {
+                    Color currentColor = circle.getColor();
+
+                    if(averageRadius.containsKey(currentColor)){
+                        RadiusInfo radiusInfo = averageRadius.get(currentColor);
+
+                        radiusInfo.setRadiusSum(circle.getRadius());
+                        radiusInfo.incrementCircle();
+                    } else {
+                        averageRadius.put(circle.getColor(), new RadiusInfo(circle.getRadius(), 1));
+                    }
+
+                }
+            }
+
+        return averageRadius;
+    }
+
+    // Calculate Average Radius of Circles Grouped by Color:
+    public static Map<Color, Double> getAverageRadiusCirclesByColors1(List<Figure> figures) {
+        Map<Color, Double> averageRadius = new HashMap<>();
+
+        for (int i = 0; i < figures.size(); i++) {
+            if (figures.get(i) instanceof Circle circle) {
+                if(!averageRadius.containsKey(circle.getColor())){
+                    int sum = circle.getRadius();
+                    int count = 1;
+                    for (int j = 0; j < figures.size(); j++) {
+                        if (i != j && figures.get(j) instanceof Circle circle1 && circle1.getColor().equals(circle.getColor())){
+                            count++;
+                            sum += circle1.getRadius();
+                        }
+                    }
+                    Double average =  (double) sum /count;
+                    averageRadius.put(circle.getColor(), average);
+                }
+            }
+        }
+
+        return averageRadius;
+    }
+
+    // Match Circles and Rectangles by Perimeter:
+
+    public static Map<Circle, Rectangle> matchCirclePerimeterToRectangle(List<Figure> figures, double tolerance) {
+        Map<Circle, Rectangle> matches = new HashMap<>();
+        for (Figure figure: figures) {
+            if (figure instanceof Circle circle){
+                for (Figure figure1: figures) {
+                    if (figure1 instanceof Rectangle rectangle) {
+                        if(Math.abs(circle.getPerimetr() - rectangle.getPerimetr()) < tolerance){
+                            matches.put(circle, rectangle);
+                        }
+                    }
+                }
+            }
+        }
+
+        return matches;
+    }
+
+    // Check for Overlapping Figures by Color:
+
+    public static Map<String, Boolean> checkForOverlappingFiguresByColor(List<Figure> figures) {
+        return null;
     }
 }
