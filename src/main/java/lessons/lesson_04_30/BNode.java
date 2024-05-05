@@ -43,14 +43,14 @@ public class BNode {
 
     private static BNode getMin(BNode bNode) {
         if(isNodeExist(bNode.left)) {
-            getMin(bNode.left);
+            return getMin(bNode.left);
         }
         return bNode;
     }
 
     private static BNode getMax(BNode bNode) {
         if(isNodeExist(bNode.right)) {
-            getMax(bNode.right);
+           return getMax(bNode.right);
 
         }
         return bNode;
