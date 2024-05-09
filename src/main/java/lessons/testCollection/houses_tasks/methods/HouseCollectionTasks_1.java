@@ -1,4 +1,9 @@
-package lessons.testCollection.houses_tasks;
+package lessons.testCollection.houses_tasks.methods;
+
+import lessons.testCollection.houses_tasks.Color;
+import lessons.testCollection.houses_tasks.Flat;
+import lessons.testCollection.houses_tasks.House;
+import lessons.testCollection.houses_tasks.HouseGenerator;
 
 import java.util.*;
 
@@ -18,25 +23,30 @@ public class HouseCollectionTasks_1 {
         return colors;
     }
 
-    // Задание 3: Вернуть карту, ключами которой являются номера этажей, а значениями - количество квартир на этом этаже (Map)
-    public static Map<Integer, Integer> getFlatsCountByFloor(House houses) {
+
+    // Задание 3: Вернуть карту, ключами которой являются
+    // номера этажей, а значениями - количество квартир на этом этаже (Map)
+    public static Map<Integer, Integer> getFlatsCountByFloor(House house) {
         Map<Integer, Integer> floorMap = new HashMap<>();
 
         return floorMap;
     }
 
-    // Задание 4: Используя очередь, вернуть список номеров квартир в порядке, в котором они появляются, начиная с первого подъезда (Queue)
-    public static List<Integer> getFlatNumbersInOrder(House houses) {
+    // Задание 4: Используя очередь, вернуть список номеров квартир в порядке,
+    // в котором они появляются, начиная с первого подъезда (Queue)
+    public static List<Integer> getFlatNumbersInOrder(House house) {
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> orderedFlatNumbers = new ArrayList<>();
 
         return orderedFlatNumbers;
     }
 
-    // Задание 5: Используя стек, вернуть список всех квартир в обратном порядке от последнего дома к первому (Stack)
+    // Задание 5: Используя стек, вернуть список всех квартир
+    // в обратном порядке от последнего дома к первому (Stack)
     public static List<Flat> getFlatsInReverseOrder(House houses) {
         Stack<Flat> stack = new Stack<>();
         List<Flat> reversedFlats = new ArrayList<>();
+
 
         return reversedFlats;
     }

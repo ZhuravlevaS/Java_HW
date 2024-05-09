@@ -1,4 +1,8 @@
-package lessons.testCollection.houses_tasks;
+package lessons.testCollection.houses_tasks.methods;
+
+import lessons.testCollection.houses_tasks.Box;
+import lessons.testCollection.houses_tasks.House;
+import lessons.testCollection.houses_tasks.HouseGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +39,8 @@ public class ComplexHouseCollectionTasks {
         return false;
     }
 
-    // Задание 5: Вернуть карту, где ключи — это номера этажей, а значения — списки всех коробок на этом этаже (List, Map)
+    // Задание 5: Вернуть карту, где ключи —
+    // это номера этажей, а значения — списки всех коробок на этом этаже (List, Map)
     public static Map<Integer, List<Box>> getBoxesPerFloor(List<House> houses) {
         Map<Integer, List<Box>> boxesByFloor = new HashMap<>();
 

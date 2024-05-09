@@ -1,4 +1,9 @@
-package lessons.testCollection.houses_tasks;
+package lessons.testCollection.houses_tasks.methods;
+
+import lessons.testCollection.houses_tasks.Box;
+import lessons.testCollection.houses_tasks.Color;
+import lessons.testCollection.houses_tasks.House;
+import lessons.testCollection.houses_tasks.HouseGenerator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +17,9 @@ public class DetailedHouseCollectionTasks {
         return null;
     }
 
-    // Задание 2: Вернуть карту, где ключи — это цвета коробок, а значения — количество комнат, содержащих хотя бы одну коробку такого цвета (List, Map)
+    // Задание 2: Вернуть карту, где ключи — это цвета коробок,
+    // а значения — количество комнат,
+    // содержащих хотя бы одну коробку такого цвета (List, Map)
     public static Map<Color, Integer> getRoomCountByBoxColor(List<House> houses) {
         Map<Color, Integer> roomCountByColor = new HashMap<>();
 
@@ -27,14 +34,16 @@ public class DetailedHouseCollectionTasks {
         return boxCount > 0 ? totalWeight / boxCount : 0;
     }
 
-    // Задание 4: Определить, в каком доме самый большой процент квартир с коробками (List)
+    // Задание 4: Определить, в каком доме самый
+    // большой процент квартир с коробками (List)
     public static House getHouseWithHighestPercentageOfFlatsWithBoxes(List<House> houses) {
         House houseWithHighestPercentage = null;
 
         return houseWithHighestPercentage;
     }
 
-    // Задание 5: Подсчитать количество квартир, которые находятся в домах без лифтов и содержат коробки (List)
+    // Задание 5: Подсчитать количество квартир,
+    // которые находятся в домах без лифтов и содержат коробки (List)
     public static int countFlatsWithBoxesInHousesWithoutElevators(List<House> houses) {
         int count = 0;
 

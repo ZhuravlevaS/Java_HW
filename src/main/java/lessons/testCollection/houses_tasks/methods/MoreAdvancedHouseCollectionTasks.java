@@ -1,4 +1,9 @@
-package lessons.testCollection.houses_tasks;
+package lessons.testCollection.houses_tasks.methods;
+
+import lessons.testCollection.houses_tasks.Color;
+import lessons.testCollection.houses_tasks.Doorway;
+import lessons.testCollection.houses_tasks.House;
+import lessons.testCollection.houses_tasks.HouseGenerator;
 
 import java.util.*;
 

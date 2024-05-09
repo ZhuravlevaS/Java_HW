@@ -1,4 +1,7 @@
-package lessons.testCollection.houses_tasks;
+package lessons.testCollection.houses_tasks.methods;
+
+import lessons.testCollection.houses_tasks.House;
+import lessons.testCollection.houses_tasks.HouseGenerator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,7 +10,8 @@ import java.util.Set;
 
 public class AdvancedHouseCollectionTasks {
 
-    // Задание 1: Вернуть список номеров квартир, у которых количество комнат больше среднего кол-ва комнат по всем квартирам каждого дома (List)
+    // Задание 1: Вернуть список номеров квартир, у которых
+    // количество комнат больше среднего кол-ва комнат по всем квартирам каждого дома (List)
     public static List<Integer> getFlatsWithMoreRoomsThanAverage(List<House> houses) {
         List<Integer> flatNumbers = new ArrayList<>();
 
