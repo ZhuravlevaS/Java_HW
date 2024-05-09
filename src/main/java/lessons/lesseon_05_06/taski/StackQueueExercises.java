@@ -83,6 +83,7 @@ public class StackQueueExercises {
 
     // Задача 5: Генерация всех возможных правильных комбинаций скобок.
     public static void generateParenthesis(int n) {
+
         generateParenthesisRecursive("", n, n);
     }
 
