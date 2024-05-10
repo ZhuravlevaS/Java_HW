@@ -1,20 +1,39 @@
 package lessons.testCollection.houses_tasks.methods;
 
-import lessons.testCollection.houses_tasks.Box;
-import lessons.testCollection.houses_tasks.Color;
-import lessons.testCollection.houses_tasks.House;
-import lessons.testCollection.houses_tasks.HouseGenerator;
+import lessons.testCollection.houses_tasks.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DetailedHouseCollectionTasks {
 
-    // Задание 1: Вернуть список всех коробок, вес которых больше среднего веса всех коробок (List)
+    // Задание 1: Вернуть список всех коробок,
+    // вес которых больше среднего веса всех коробок (List)
     public static List<Box> getBoxesHeavierThanAverage(List<House> houses) {
+        int boxesQuantity = 0;
+        double commonWeihght = 0;
+        List<Box> allBoxes = new ArrayList<>();
+        List<Box> heavyBoxes = new ArrayList<>();
 
-        return null;
+        for (House house: houses){
+            for (Flat flat: house.getFlats()){
+                for (Room room: flat.getRoomList()){
+                    allBoxes.addAll(room.getBoxes());
+                    boxesQuantity += room.getBoxes().size();
+                    for (Box box: room.getBoxes()) {
+                        commonWeihght += box.getWeight();
+                    }
+                }
+            }
+        }
+
+        double averageWeight = commonWeihght/boxesQuantity;
+
+        for (Box box: allBoxes){
+            if (box.getWeight() > averageWeight){
+                heavyBoxes.add(box);
+            }
+        }
+        return heavyBoxes;
     }
 
     // Задание 2: Вернуть карту, где ключи — это цвета коробок,
@@ -22,6 +41,25 @@ public class DetailedHouseCollectionTasks {
     // содержащих хотя бы одну коробку такого цвета (List, Map)
     public static Map<Color, Integer> getRoomCountByBoxColor(List<House> houses) {
         Map<Color, Integer> roomCountByColor = new HashMap<>();
+
+        for (House house: houses){
+            for (Flat flat: house.getFlats()){
+                for (Room room: flat.getRoomList()){
+                    Set<Color> uniqueColors = new HashSet<>();
+                    int colorsQuantity = Color.values().length;
+                    for (Box box: room.getBoxes()) {
+                        Color color = box.getColor();
+                        if(!uniqueColors.contains(color)){
+                            uniqueColors.add(color);
+                            roomCountByColor.put(color,roomCountByColor.getOrDefault(color, 0) + 1 );
+                        }
+                        if (uniqueColors.size() == colorsQuantity){
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         return roomCountByColor;
     }
@@ -31,6 +69,20 @@ public class DetailedHouseCollectionTasks {
         double totalWeight = 0;
         int boxCount = 0;
 
+        for (House house: houses){
+            for (Flat flat: house.getFlats()){
+                for (Room room: flat.getRoomList()){
+                    if(room.getColor().equals(Color.GREEN)) {
+                        boxCount += room.getBoxes().size();
+                        for (Box box: room.getBoxes()) {
+                            totalWeight += box.getWeight();
+                        }
+                    }
+
+                }
+            }
+        }
+
         return boxCount > 0 ? totalWeight / boxCount : 0;
     }
 
@@ -38,20 +90,59 @@ public class DetailedHouseCollectionTasks {
     // большой процент квартир с коробками (List)
     public static House getHouseWithHighestPercentageOfFlatsWithBoxes(List<House> houses) {
         House houseWithHighestPercentage = null;
+        double percentageMax = 0;
+        for (House house: houses) {
+            if (houseWithHighestPercentage != null){
+                houseWithHighestPercentage = house;
+                percentageMax = getPercentage(house);
+            } else {
+                if (getPercentage(house) > percentageMax){
+                    houseWithHighestPercentage = house;
+                    percentageMax = getPercentage(house);
+                }
+            }
+        }
 
         return houseWithHighestPercentage;
+    }
+
+    public static double getPercentage(House house) {
+        int flatWithBoxes = 0;
+        int countFlats = 0;
+        for (Flat flat: house.getFlats()){
+
+            for (Room room: flat.getRoomList()){
+                countFlats += flat.getRoomList().size();
+                if (!room.getBoxes().isEmpty()){
+                    flatWithBoxes++;
+                    break;
+                }
+            }
+        }
+
+        return (double) flatWithBoxes /countFlats * 100;
     }
 
     // Задание 5: Подсчитать количество квартир,
     // которые находятся в домах без лифтов и содержат коробки (List)
     public static int countFlatsWithBoxesInHousesWithoutElevators(List<House> houses) {
         int count = 0;
-
+        for (House house: houses) {
+            if (!house.isHasElevator()){
+                for (Flat flat: house.getFlats()){
+                   for (Room room: flat.getRoomList()){
+                       if (!flat.getRoomList().get(0).getBoxes().isEmpty()){
+                           count++;
+                       }
+                   }
+                }
+            }
+        }
         return count;
     }
 
     public static void main(String[] args) {
-        List<House> houses = HouseGenerator.generateHouses(777);
+        List<House> houses = HouseGenerator.generateHouses(7);
 
         System.out.println("Коробки тяжелее среднего: " + getBoxesHeavierThanAverage(houses).size());
         System.out.println("Количество комнат по цветам коробок: " + getRoomCountByBoxColor(houses));

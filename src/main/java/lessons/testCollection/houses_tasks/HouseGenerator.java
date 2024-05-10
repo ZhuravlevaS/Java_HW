@@ -11,12 +11,12 @@ public class HouseGenerator {
         List<House> houses = new ArrayList<>();
         for (int i = 0; i < numberOfHouses; i++) {
 
-            int entrance = random.nextInt(10) + 1;
+            int entrance = random.nextInt(5) + 1;
             boolean hasElevator = random.nextBoolean();
 
             List<Flat> flats = new ArrayList<>();
-            int floors = random.nextInt(99) + 1;
-            int flatsPerFloor = random.nextInt(10) + 1;
+            int floors = random.nextInt(25) + 1;
+            int flatsPerFloor = random.nextInt(5) + 1;
             for (int floor = 0; floor < floors; floor++) {
                 for (int flatIndex = 0; flatIndex < flatsPerFloor; flatIndex++) {
                     flats.add(generateFlat(floor));
