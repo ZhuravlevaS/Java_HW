@@ -3,35 +3,23 @@ package lessons.testCollection.university_tasks;
 import lombok.Getter;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
-
 public class Student extends Person implements Identifiable, Descriable, CommunityMember {
     private final String studentId;
-    private LinkedList<Course> courseList;
+    private final List<Course> courseList = new LinkedList<>();
 
     public void addCourse(Course course) {
-        if (Objects.isNull(course)) {
-            System.out.println("Курс не может быть null");
-        } else {
-            if(Objects.isNull(courseList)) {
-                courseList = new LinkedList<>();
-                courseList.add(course);
-            } else {
-                courseList.add(course);
-            }
-        }
+        Objects.requireNonNull(course, "Курс не может быть null");
+
+        courseList.add(course);
     }
 
     public void removeCourse(Course course) {
-        if (Objects.isNull(course)) {
-            System.out.println("Курс не может быть null");
-        } else {
-            if(!Objects.isNull(courseList)) {
-                courseList.remove(course);
-            }
-        }
+        Objects.requireNonNull(course, "Курс не может быть null");
+        courseList.remove(course);
     }
 
 
@@ -43,7 +31,7 @@ public class Student extends Person implements Identifiable, Descriable, Communi
     @Override
     public String toString() {
 
-        return super.toString()   + " " + "Student{" +
+        return super.toString() + " " + "Student{" +
                 "studentId=" + studentId +
                 ", courseList=" + courseList +
                 '}';
