@@ -5,11 +5,11 @@ import lessons.testCollection.houses_tasks.*;
 import java.util.*;
 
 public class HouseCollectionTasks_1 {
-    
+
     // Задание 1: Вернуть список всех квартир во всех домах (List)
     public static List<Flat> getAllFlats(List<House> houses) {
         List<Flat> allFlats = new ArrayList<>();
-        for (House house: houses){
+        for (House house : houses) {
             allFlats.addAll(house.getFlats());
         }
         return allFlats;
@@ -20,12 +20,12 @@ public class HouseCollectionTasks_1 {
         Set<Color> colors = new HashSet<>();
         int colorsQuantity = Color.values().length;
 
-        for (House house: houses) {
-            if(colorsQuantity == colors.size()) break;
-            for (Flat flat: house.getFlats()){
-                if(colorsQuantity == colors.size()) break;
-                for (Room room: flat.getRoomList()){
-                    if(colorsQuantity == colors.size()) break;
+        for (House house : houses) {
+            if (colorsQuantity == colors.size()) break;
+            for (Flat flat : house.getFlats()) {
+                if (colorsQuantity == colors.size()) break;
+                for (Room room : flat.getRoomList()) {
+                    if (colorsQuantity == colors.size()) break;
                     colors.add(room.getColor());
                 }
             }
@@ -38,10 +38,10 @@ public class HouseCollectionTasks_1 {
     // номера этажей, а значениями - количество квартир на этом этаже (Map)
     public static Map<Integer, Integer> getFlatsCountByFloor(House house) {
         Map<Integer, Integer> floorMap = new HashMap<>();
-        System.out.println(house);
-            for (Flat flat: house.getFlats()){
-                floorMap.put(flat.getFloor(), floorMap.getOrDefault(flat.getFloor(),0) + 1);
-            }
+
+        for (Flat flat : house.getFlats()) {
+            floorMap.put(flat.getFloor(), floorMap.getOrDefault(flat.getFloor(), 0) + 1);
+        }
         return floorMap;
     }
 
@@ -50,6 +50,7 @@ public class HouseCollectionTasks_1 {
     public static List<Integer> getFlatNumbersInOrder(House house) {
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> orderedFlatNumbers = new ArrayList<>();
+
 
         return orderedFlatNumbers;
     }
@@ -60,7 +61,7 @@ public class HouseCollectionTasks_1 {
         Stack<Flat> stack = new Stack<>();
         List<Flat> reversedFlats = new ArrayList<>();
 
-        for (Flat flat: house.getFlats()){
+        for (Flat flat : house.getFlats()) {
             stack.push(flat);
         }
 
@@ -69,7 +70,7 @@ public class HouseCollectionTasks_1 {
         }
         return reversedFlats;
     }
-    
+
     public static void main(String[] args) {
         List<House> houses = HouseGenerator.generateHouses(2);
 

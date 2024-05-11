@@ -15,15 +15,15 @@ public class HouseGenerator {
             boolean hasElevator = random.nextBoolean();
 
             List<Flat> flats = new ArrayList<>();
-            int floors = random.nextInt(25) + 1;
+            int floors = random.nextInt(7) + 1;
             int flatsPerFloor = random.nextInt(5) + 1;
-            for (int floor = 0; floor < floors; floor++) {
+            for (int floor = 0; floor <= floors; floor++) {
                 for (int flatIndex = 0; flatIndex < flatsPerFloor; flatIndex++) {
                     flats.add(generateFlat(floor));
                 }
             }
 
-            House house = new House(flats, entrance, hasElevator, floors);
+            House house = new House(flats, entrance, hasElevator, floors );
             houses.add(house);
         }
         return houses;
