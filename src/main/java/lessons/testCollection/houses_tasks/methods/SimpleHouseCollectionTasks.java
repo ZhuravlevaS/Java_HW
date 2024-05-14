@@ -1,5 +1,7 @@
 package lessons.testCollection.houses_tasks.methods;
 
+import errors.ErrorsMessages;
+import exceptions.ListNullException;
 import lessons.testCollection.houses_tasks.Flat;
 import lessons.testCollection.houses_tasks.House;
 import lessons.testCollection.houses_tasks.HouseGenerator;
@@ -9,7 +11,17 @@ import java.util.*;
 public class SimpleHouseCollectionTasks {
 
     // Задание 1: Вернуть количество подъездов во всех домах (List)
-    public static int getTotalEntrances(List<House> houses) {
+
+    /**
+     *
+     * @param houses
+     * @return
+     * @throws ListNullException
+     */
+    public static int getTotalEntrances(List<House> houses) throws ListNullException {
+
+        if (houses == null) throw new ListNullException(ErrorsMessages.THIS_OBJECTS_CANNOT_BE_NULL);
+
         int totalEntrances = 0;
         for (House house : houses) {
             totalEntrances += house.getEntrance();
@@ -76,7 +88,7 @@ public class SimpleHouseCollectionTasks {
     public static void main(String[] args) {
         List<House> houses = HouseGenerator.generateHouses(5); // Генерируем дома для примера
 
-        System.out.println("Общее количество подъездов: " + getTotalEntrances(houses));
+        System.out.println("Общее количество подъездов: " + getTotalEntrances(new ArrayList<>()));
         System.out.println("Этажи с лифтами: " + getFloorsWithElevators(houses));
         System.out.println("Большие дома: " + getLargeHouses(houses));
         System.out.println("Наличие домов без лифта: " + hasHouseWithoutElevator(houses));
