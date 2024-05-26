@@ -106,7 +106,7 @@ public class Streams_basic {
 //        // 11. skip()
 //        // Задача: Пропустить первые 3 элемента списка чисел.
     public List<Integer> skipFirstThreeNumbers(List<Integer> numbers) {
-        return numbers.stream().limit(3).collect(Collectors.toList());
+        return numbers.stream().skip(3).collect(Collectors.toList());
     }
 
     //        // 12. skip()
@@ -192,7 +192,7 @@ public class Streams_basic {
     // 24. min()
     // Задача: Найти минимальное значение в списке чисел.
     public Optional<Integer> findMinValue(List<Integer> numbers) {
-        return numbers.stream().min((num1, num2) -> num2 - num1);
+        return numbers.stream().min(Integer::compareTo);
     }
 
     // 25. findAny()
@@ -204,7 +204,7 @@ public class Streams_basic {
     // 26. toArray()
     // Задача: Преобразовать список строк в массив строк.
     public String[] toArrayStrings(List<String> strings) {
-        return (String[]) strings.stream().toArray();
+        return strings.toArray(String[]::new);
     }
 
     // 27. peek()

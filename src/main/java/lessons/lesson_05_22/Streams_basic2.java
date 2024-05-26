@@ -1,5 +1,6 @@
 package lessons.lesson_05_22;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,10 +54,10 @@ public class Streams_basic2 {
 
     // 5. Отфильтровать строки, отсортировать и вернуть как массив
     public String[] filterSortToArray(List<String> strings) {
-        return (String[]) strings.stream()
+        return  strings.stream()
                 .filter((str) -> !str.isEmpty())
                 .sorted()
-                .toArray();
+                .toArray(String[]::new);
     }
 
     // 6. Преобразовать список чисел в их квадратные корни, удалить дубликаты и посчитать количество
@@ -132,7 +133,7 @@ public class Streams_basic2 {
     public Optional<String> findFirstLongStringSorted(List<String> strings) {
         return strings.stream()
                 .filter((str) -> str.length() > 5)
-                .sorted((str1, str2) -> str1.compareTo(str2))
+                .sorted(Comparator.comparingInt(String::length))
                 .findFirst();
     }
 
@@ -141,7 +142,7 @@ public class Streams_basic2 {
         return numbers.stream()
                 .map(num -> num * num)
                 .filter(num -> num < 50)
-                .min((num1, num2) -> num2 - num1);
+                .min(Integer::compareTo);
     }
 
     // 16. Отфильтровать строки, начинающиеся с "B", отсортировать и посчитать количество
@@ -163,10 +164,10 @@ public class Streams_basic2 {
 
     // 18. Отфильтровать строки длиной больше 3, преобразовать в верхний регистр и вернуть как массив
     public String[] filterLengthGreaterThanThreeToUpperArray(List<String> strings) {
-        return (String[]) strings.stream()
+        return strings.stream()
                 .filter(str -> str.length() > 3)
-                .map(str -> str.toUpperCase())
-                .toArray();
+                .map(String::toUpperCase)
+                .toArray(String[]::new);
     }
 
     // 19. Отфильтровать числа больше 5, преобразовать в их кубы и вернуть как список
