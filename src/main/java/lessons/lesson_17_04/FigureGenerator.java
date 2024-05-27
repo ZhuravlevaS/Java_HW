@@ -13,7 +13,7 @@ public class FigureGenerator {
 
     public static List<Figure> generateFigures() {
         List<Figure> figures = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             figures.add(generateRandomFigure());
         }
         return figures;
