@@ -2,6 +2,7 @@ package homeworks.streams;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -85,19 +86,28 @@ public class TASKI2 {
                             .map(elem -> elem.getKey())
                             .collect(Collectors.toList());
 
-                    return  chars1.stream().map(e->e.toString()).collect(Collectors.joining());
+                    return  chars1.stream().map(e-> e.toString()).collect(Collectors.joining());
 
                 }).collect(Collectors.toList());
 
         System.out.println(strings1);
     }
-//    //Напишите метод, который принимает список строк и возвращает самую длинную строку в списке.
-//    public static String longestString(List<String> strings) {
-//
-//    }
-//    //Напишите метод, который принимает список объектов и
-//    // возвращает среднее значение заданного числового поля всех объектов в списке.
-//    public static <T> double averageFieldValue(List<T> objects, String fieldName) throws NoSuchFieldException {
-//
-//    }
+    //Напишите метод, который принимает список строк и возвращает самую длинную строку в списке.
+    public static String longestString(List<String> strings) {
+            return strings.stream()
+                    .max(Comparator.comparingInt(String::length)).get();
+    }
+    //Напишите метод, который принимает список объектов и
+    // возвращает среднее значение заданного числового поля всех объектов в списке.
+    public static <T> double averageFieldValue(List<T> objects, String fieldName) throws NoSuchFieldException {
+        return objects.stream()
+                .mapToInt(obj -> {
+                    try {
+                        Field field = obj.getClass().getDeclaredField(fieldName);
+                        return (int) field.get(obj);
+                    } catch (NoSuchFieldException | IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).average().getAsDouble();
+    }
 }
