@@ -20,6 +20,7 @@ public class FigureTasks {
 //        System.out.println(findRectangleWithMaxArea(figures));
 //
         printEquilateralTriangles(figures);
+        findCircleWithMinRadiusOfColor(figures, Color.BLUE);
 //        System.out.println(sumOfRadiiForColor(figures, Color.BLUE));
 //        System.out.println(hasRectangleAndTriangleOfSameColor(figures));
 //        System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
@@ -167,6 +168,7 @@ public class FigureTasks {
                 }
             }
         }
+
         return minRadiusCircle;
     }
 
