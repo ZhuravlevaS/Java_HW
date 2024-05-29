@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 //уровень 7
-public class TASKI2 {
+public class Tasks2 {
     public static void main(String[] args) throws NoSuchFieldException {
 //        List<Integer> lists = List.of(1, 2, 3);
 //        System.out.println(sumOfSquaresOfOddNumbers(lists));
@@ -21,7 +21,7 @@ public class TASKI2 {
 //
 //        System.out.println(filterByField(people, "age", 48));
 
-        List<String> strings = List.of("kjfhsksdhf ksjdfhjksd ksjdfshdf m", "Mama mwww z");
+        List<String> strings = List.of("kjfhsksdhf ksjdfhjksd ksjdfshdf m", "adc");
 
         uniqueChars(strings);
     }
@@ -71,26 +71,10 @@ public class TASKI2 {
     //Напишите метод, который принимает список строк и возвращает список строк, содержащих
     // только уникальные символы (т.е. символы, которые не повторяются в строке).
     public static void uniqueChars(List<String> strings) {
-        List<String> strings1 = strings.stream()
-                .map(el -> {
-                    List<Character> chars1 = el.chars().
-                            mapToObj(elem -> (char) elem)
-                            .collect(Collectors.toMap(
-                                    Function.identity(),
-                                    elem -> 1L,
-                                    (oldValue, el2) -> oldValue + 1
-                            ))
-                            .entrySet()
-                            .stream()
-                            .filter((elem) -> elem.getValue() == 1L)
-                            .map(elem -> elem.getKey())
-                            .collect(Collectors.toList());
-
-                    return  chars1.stream().map(e-> e.toString()).collect(Collectors.joining());
-
-                }).collect(Collectors.toList());
-
-        System.out.println(strings1);
+        List<String> list = strings.stream()
+                .filter((str)-> str.chars().distinct().count() == str.length())
+                .collect(Collectors.toList());
+        System.out.println(list);
     }
     //Напишите метод, который принимает список строк и возвращает самую длинную строку в списке.
     public static String longestString(List<String> strings) {

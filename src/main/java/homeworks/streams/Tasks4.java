@@ -1,7 +1,7 @@
-package homeworks.streams.taski4;
+package homeworks.streams;
 
 //уровень 10
-public class AAAA {
+public class Tasks4 {
 
     /**
      * Задача 1: Найти k-ую перестановку из n элементов

@@ -1,4 +1,4 @@
-package homeworks.streams.taski3;
+package homeworks.streams;
 
 
 import lessons._05_24_summary.taski1.Person;
@@ -6,7 +6,7 @@ import lessons._05_24_summary.taski1.Person;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TASKI3 {
+public class Tasks3 {
 
     public static void main(String[] args) {
         m1("y");
