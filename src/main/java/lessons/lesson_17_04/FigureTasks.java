@@ -2,33 +2,36 @@ package lessons.lesson_17_04;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class FigureTasks {
     public static void main(String[] args) {
         List<Figure> figures = FigureGenerator.generateFigures();
 
-        for (Figure figure : figures) {
-            System.out.println(figure);
-        }
+//        for (Figure figure : figures) {
+//            System.out.println(figure);
+//        }
 
         System.out.println("******************");
 
-        System.out.println(countCirclesOfColor(figures, Color.BLUE));
-        System.out.println(findRectangleWithMaxArea(figures));
-
+ //       System.out.println(countCirclesOfColor(figures, Color.BLUE));
+//        System.out.println(findRectangleWithMaxArea(figures));
+//
         printEquilateralTriangles(figures);
-        System.out.println(sumOfRadiiForColor(figures, Color.BLUE));
-        System.out.println(hasRectangleAndTriangleOfSameColor(figures));
-        System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
-
-        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
-        printFiguresWithAtLeastOneMatchingParameter(figures);
-        System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
-
-        System.out.println(findCircleThatFitsMostTriangles(figures));
-        System.out.println(findSmallestAngleTriangleInCircle(new Circle(Color.BLUE, 30),figures ));
-        System.out.println(findCircleWithSmallestAreaToRadiusRatio(figures));
+        findCircleWithMinRadiusOfColor(figures, Color.BLUE);
+//        System.out.println(sumOfRadiiForColor(figures, Color.BLUE));
+//        System.out.println(hasRectangleAndTriangleOfSameColor(figures));
+//        System.out.println(countTrianglesWithSideGreaterThan(figures, 70));
+//
+//        System.out.println(findCirclesWithRadiusEqualToTriangleSide(figures));
+//        printFiguresWithAtLeastOneMatchingParameter(figures);
+//        System.out.println(findCirclesWithRadiusGreaterThanSumOfAnyTriangleSides(figures));
+//
+//        System.out.println(findCircleThatFitsMostTriangles(figures));
+//        System.out.println(findSmallestAngleTriangleInCircle(new Circle(Color.BLUE, 30),figures ));
+//        System.out.println(findCircleWithSmallestAreaToRadiusRatio(figures));
     }
 
     // ****************** Basic Tasks(DONE) ******************
@@ -36,82 +39,117 @@ public class FigureTasks {
     /**
      * 1. Напишите метод для подсчета всех кругов заданного цвета в списке фигур.
      */
-    public static int countCirclesOfColor(List<Figure> figures, Color color) {
-        int count = 0;
+    public static long countCirclesOfColor(List<Figure> figures, Color color) {
+//        int count = 0;
+//
+//        for (Figure figure : figures) {
+//            if (figure instanceof Circle && ((Circle) figure).getColor() == color) {
+//                count++;
+//            }
+//        }
+//        return count;
 
-        for (Figure figure : figures) {
-            if (figure instanceof Circle && ((Circle) figure).getColor() == color) {
-                count++;
-            }
-        }
-        return count;
+        return figures.stream()
+                .filter(figure -> figure instanceof Circle && figure.getColor().equals(color))
+                .peek(figure -> System.out.println(figure))
+                .count();
     }
 
     /**
      * 2. Напишите метод для нахождения прямоугольника с максимальной площадью.
      */
     public static Rectangle findRectangleWithMaxArea(List<Figure> figures) {
-        Rectangle rectangle = null;
+//        Rectangle rectangle = null;
+//
+//        for (Figure figure : figures) {
+//            if (figure instanceof Rectangle current) {
+//                if (rectangle == null) {
+//                    rectangle = current;
+//                } else {
+//                    int currentSquare = current.getHight() * current.getWidth();
+//                    int square = rectangle.getHight() * rectangle.getWidth();
+//                    if (currentSquare > square) {
+//                        rectangle = current;
+//                    }
+//                }
+//            }
+//        }
+//        return rectangle;
 
-        for (Figure figure : figures) {
-            if (figure instanceof Rectangle current) {
-                if (rectangle == null) {
-                    rectangle = current;
-                } else {
-                    int currentSquare = current.getHight() * current.getWidth();
-                    int square = rectangle.getHight() * rectangle.getWidth();
-                    if (currentSquare > square) {
-                        rectangle = current;
-                    }
-                }
-            }
-        }
-        return rectangle;
+        return (Rectangle) figures.stream()
+                .filter(figure -> figure instanceof Rectangle)
+                .max((figure1, figure2) ->
+                        (int) (((Rectangle) figure1).getSquare() - ((Rectangle) figure2).getSquare()))
+                .get();
+
+
     }
 
     /**
      * 3. Напишите метод для вывода всех треугольников, у которых все стороны равны.
      */
     public static void printEquilateralTriangles(List<Figure> figures) {
-        for (Figure figure : figures) {
-            if (figure instanceof Triangle &&
-                    ((Triangle) figure).getSide1() == ((Triangle) figure).getSide2() &&
-                    ((Triangle) figure).getSide2() == ((Triangle) figure).getSide3()) {
-                System.out.println(figure);
-            }
-        }
+//        for (Figure figure : figures) {
+//            if (figure instanceof Triangle &&
+//                    ((Triangle) figure).getSide1() == ((Triangle) figure).getSide2() &&
+//                    ((Triangle) figure).getSide2() == ((Triangle) figure).getSide3()) {
+//                System.out.println(figure);
+//            }
+//        }
+
+        figures
+                .forEach((figure) -> {
+                    if (figure instanceof Triangle &&
+                            ((Triangle) figure).getSide1() == ((Triangle) figure).getSide2() &&
+                            ((Triangle) figure).getSide2() == ((Triangle) figure).getSide3()) {
+                        System.out.println(figure);
+                    }
+                });
     }
 
     /**
      * 4. Напишите метод для нахождения суммы радиусов всех кругов определенного цвета.
      */
     public static int sumOfRadiiForColor(List<Figure> figures, Color color) {
-        int count = 0;
+//        int count = 0;
+//
+//        for (Figure figure : figures) {
+//            if (figure instanceof Circle && ((Circle) figure).getColor() == color) {
+//                count += ((Circle) figure).getRadius();
+//            }
+//        }
+//        return count;
 
-        for (Figure figure : figures) {
-            if (figure instanceof Circle && ((Circle) figure).getColor() == color) {
-                count += ((Circle) figure).getRadius();
-            }
-        }
-        return count;
+        return figures.stream()
+                .filter(figure -> figure instanceof Circle && figure.getColor().equals(color))
+                .mapToInt(figure -> ((Circle) figure).getRadius())
+                .sum();
     }
 
     /**
      * 5. Напишите метод для определения, есть ли в списке фигур прямоугольник и треугольник одинакового цвета.
      */
     public static boolean hasRectangleAndTriangleOfSameColor(List<Figure> figures) {
-        for (Figure figure: figures) {
-            if (figure instanceof Rectangle currentRectangle) {
-                for (Figure figure1 : figures) {
-                    if (figure1 instanceof Triangle currentTriangle) {
-                        if (currentTriangle.getColor().equals(currentRectangle.getColor())) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+//        for (Figure figure : figures) {
+//            if (figure instanceof Rectangle currentRectangle) {
+//                for (Figure figure1 : figures) {
+//                    if (figure1 instanceof Triangle currentTriangle) {
+//                        if (currentTriangle.getColor().equals(currentRectangle.getColor())) {
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+
+        Set<Color> colors = figures.stream()
+                .filter((el) -> el instanceof Rectangle)
+                .map(el -> el.getColor())
+                .collect(Collectors.toSet());
+
+        return figures.stream()
+                .anyMatch(el -> el instanceof Triangle && colors.contains(el.getColor()));
     }
 
     // ****************** Intermediate Tasks (DONE)  ******************
@@ -130,6 +168,7 @@ public class FigureTasks {
                 }
             }
         }
+
         return minRadiusCircle;
     }
 
@@ -375,31 +414,31 @@ public class FigureTasks {
         Triangle minAngleTriangle = null;
         double min = 0;
 
-        for (Figure figure:figures) {
-            if (figure instanceof Triangle triangle){
+        for (Figure figure : figures) {
+            if (figure instanceof Triangle triangle) {
 
-                double radius = (triangle.getSide1() * triangle.getSide2()* triangle.getSide3())/(4* triangle.getSquare());
+                double radius = (triangle.getSide1() * triangle.getSide2() * triangle.getSide3()) / (4 * triangle.getSquare());
                 if (Double.valueOf(circle.getRadius()).equals(radius)) {
                     triangles.add(triangle);
                 }
             }
         }
 
-        if(triangles.size() == 1) {
+        if (triangles.size() == 1) {
             return triangles.get(0);
         }
 
-        if(triangles.size() > 1) {
-            for (Triangle triangle: triangles){
+        if (triangles.size() > 1) {
+            for (Triangle triangle : triangles) {
                 double cosA = getCos(triangle.getSide1(), triangle.getSide2(), triangle.getSide3());
                 double cosB = getCos(triangle.getSide1(), triangle.getSide3(), triangle.getSide2());
                 double cosC = getCos(triangle.getSide2(), triangle.getSide3(), triangle.getSide1());
 
                 double minAngle = 0;
 
-                if(cosA < cosB && cosA < cosC) {
+                if (cosA < cosB && cosA < cosC) {
                     minAngle = cosA;
-                } else if(cosB < cosC) {
+                } else if (cosB < cosC) {
                     minAngle = cosB;
                 } else {
                     minAngle = cosC;
@@ -418,7 +457,7 @@ public class FigureTasks {
     }
 
     private static double getCos(int a, int b, int c) {
-        return (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2))/(2 * a * b);
+        return (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b);
     }
 
 
@@ -430,11 +469,11 @@ public class FigureTasks {
      */
     public static Circle findCircleWithSmallestAreaToRadiusRatio(List<Figure> figures) {
         Circle min = null;
-        for (Figure figure: figures) {
+        for (Figure figure : figures) {
             if (figure instanceof Circle circle) {
-                if(min == null) {
+                if (min == null) {
                     min = circle;
-                } else if(min.getSquare()/min.getRadius() > circle.getSquare()/circle.getRadius()) {
+                } else if (min.getSquare() / min.getRadius() > circle.getSquare() / circle.getRadius()) {
                     min = circle;
                 }
             }
