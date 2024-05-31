@@ -3,7 +3,7 @@ package lessons._05_17_summery;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.DayOfWeek;
+import java.time.*;
 import java.util.Scanner;
 
 //Напишите программу, чтобы узнать, какое исключение будет брошено, если:
@@ -30,6 +30,25 @@ public class Main {
         // 6 В отдельном методе создать Scanner и указать в нём путь к файлу вместо System.in.
 
         // getScanner();
+
+        String str = "Some";
+        System.out.println(getStr(str));
+        System.out.println(str);
+
+        LocalDate ld = LocalDate.of(2023, 11, 1);
+        LocalTime lt1 = LocalTime.of(10, 30);
+        LocalTime lt2 = LocalTime.of(12, 45);
+
+        Duration duration = Duration.between(lt1, lt2);
+        System.out.println(duration.toHours());
+        System.out.println(duration.toMinutesPart());
+
+        ZonedDateTime z = ZonedDateTime.of(LocalDateTime.now(), ZoneId.systemDefault());
+    }
+
+    private static String getStr(String s) {
+        s = s + s;
+        return s;
     }
 
     private static void getStrToInt() {
