@@ -1,0 +1,4 @@
+income,status,expectedTax
+30000,single,6000
+60000,single,15000
+90000,married,18000
