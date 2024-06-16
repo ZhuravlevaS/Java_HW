@@ -38,6 +38,7 @@ class OrderServiceTest {
         when(orderRepository.findById(1)).thenReturn(order);
 
         PurchaseOrder result = orderService.getOrder(1);
+        verify(orderRepository).findById(1);
         assertEquals(order, result);
     }
 }
