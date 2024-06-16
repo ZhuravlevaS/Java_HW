@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AdvancedHouseCollectionTasks {
 
@@ -17,22 +18,21 @@ public class AdvancedHouseCollectionTasks {
     // количество комнат больше среднего кол-ва комнат по всем квартирам каждого дома (List)
     public static List<Integer> getFlatsWithMoreRoomsThanAverage(List<House> houses) throws DivideZeroException {
         List<Integer> flatNumbers = new ArrayList<>();
-        int totalRoom = 0;
-        int count = 0;
         double averageRoom = 0;
 
-        for (House house : houses) {
-            for (Flat flat : house.getFlats()) {
-                totalRoom += flat.getRoomList().size();
-                count++;
-            }
-        }
+        int totalRooms = houses.stream()
+                .flatMap(house -> house.getFlats().stream())
+                .mapToInt(flat -> flat.getRoomList().size())
+                .sum();
+        long count = houses.stream()
+                .flatMap(house -> house.getFlats().stream())
+                .count();
 
         if(count == 0){
             throw new DivideZeroException(ErrorsMessages.DIVIDER_CANNOT_BE_ZERO);
         }
 
-        averageRoom = (double) totalRoom /count;
+        averageRoom = (double) totalRooms /count;
 
         for (House house : houses) {
             for (Flat flat : house.getFlats()) {
@@ -48,17 +48,12 @@ public class AdvancedHouseCollectionTasks {
     // Задание 2: Вернуть список этажей, на которых есть лифт
     // (List и Set для исключения повторений)
     public static List<Integer> getFloorsWithElevator(List<House> houses) {
-        Set<Integer> floorsWithElevator = new HashSet<>();
-
-        // Проходим по списку домов и добавляем номера этажей с лифтом в набор
-        for (House house : houses) {
-            if (house.isHasElevator()) {
-                floorsWithElevator.addAll(getFloorNumbers(house));
-            }
-
-        }
-
-        return new ArrayList<>(floorsWithElevator);
+        return houses.stream()
+                .filter(House::isHasElevator)
+                .flatMap(house -> house.getFlats().stream())
+                .map(Flat::getFloor)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private static Set<Integer> getFloorNumbers(House house) {
