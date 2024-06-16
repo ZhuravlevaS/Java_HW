@@ -1,9 +1,9 @@
 package homeworks.homework_05_16;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Handler {
     public static Map<Team<? extends Participant>, Double> teamTotalPoints = new HashMap<>();
@@ -25,17 +25,12 @@ public class Handler {
 
     private static Map<Category, List<Team<? extends Participant>>> getBest3Commands(Category category) {
         Map<Category, List<Team<? extends Participant>>> bestPerCategory = new HashMap<>();
-        GenerateData.teams.stream()
+        List<Team<? extends Participant>> sortedTeams = GenerateData.teams.stream()
                 .filter((team -> team.getCategory().equals(category)))
-                .sorted((team1, team2) -> (int) (team2.getTotalPoints() - team1.getTotalPoints()))
-                .forEach((team) -> {
-                    if (!bestPerCategory.containsKey(category)) {
-                        bestPerCategory.put(category, new ArrayList<>());
-                        bestPerCategory.get(category).add(team);
-                    } else if (bestPerCategory.get(category).size() < 3) {
-                        bestPerCategory.get(category).add(team);
-                    }
-                });
+                .sorted((team1, team2) -> Double.compare(team2.getTotalPoints(), team1.getTotalPoints()))
+                .limit(3)
+                .collect(Collectors.toList());
+        bestPerCategory.put(category, sortedTeams);
 
         return bestPerCategory;
     }
