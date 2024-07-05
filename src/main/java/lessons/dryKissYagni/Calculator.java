@@ -1,5 +1,8 @@
 package lessons.dryKissYagni;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Нарушение KISS:
 public class Calculator {
     public int add(int a, int b) {
@@ -15,6 +18,7 @@ public class Calculator {
     }
 
     public int divide(int a, int b) {
+        List<String> e= new ArrayList<>();
         if (b != 0) {
             return a / b;
         } else {

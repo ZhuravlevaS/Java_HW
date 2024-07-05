@@ -1,8 +1,6 @@
 package homeworks.streams;
 
 
-import lessons._05_24_summary.taski1.Person;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,6 +11,8 @@ public class Tasks3 {
         m2(3);
         m3();
         m4();
+
+        String s  =  null;
     }
 
     /**
