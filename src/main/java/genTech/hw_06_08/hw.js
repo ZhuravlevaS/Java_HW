@@ -5,7 +5,7 @@ db.getCollection("users").aggregate([
         $match: {
             country: { $ne: "China" },
             is_blocked: { $ne: true },
-            balance: { $gte: 0 }
+            balance: { $gt: 0 }
         }
     }
 ])
@@ -40,7 +40,7 @@ db.getCollection("users").aggregate([
 // Разблокировать всех юзеров с положительным балансом
 db.getCollection("users").updateMany(
     {
-        balance: { $gte: 0 }
+        balance: { $gt: 0 }
     },
     {
         $set: { is_blocked: false }
